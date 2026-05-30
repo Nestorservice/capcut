@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#ffd6fe",
+                        "primary-container": "#ff4c86",
+                        "inverse-surface": "#f8dbe0",
+                        "on-secondary": "#570066",
+                        "on-primary": "#66002a",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#5ce069",
+                        "secondary-container": "#86039c",
+                        "primary": "#ffb1c1",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#002105",
+                        "inverse-primary": "#bb0054",
+                        "surface-variant": "#423033",
+                        "surface-tint": "#ffb1c1",
+                        "surface": "#1e0f12",
+                        "on-surface-variant": "#e2bdc3",
+                        "on-primary-fixed": "#3f0018",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "primary-fixed": "#ffd9df",
+                        "surface-container-low": "#27171a",
+                        "outline": "#a9888e",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "on-secondary-container": "#f7a0ff",
+                        "secondary": "#f9abff",
+                        "tertiary-container": "#0fa739",
+                        "on-surface": "#f8dbe0",
+                        "surface-container-high": "#362529",
+                        "surface-container": "#2b1b1e",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "on-background": "#f8dbe0",
+                        "on-primary-container": "#590024",
+                        "inverse-on-surface": "#3d2c2f",
+                        "surface-container-highest": "#423033",
+                        "on-tertiary": "#00390d",
+                        "surface-container-lowest": "#180a0d",
+                        "on-tertiary-container": "#00320a",
+                        "surface-bright": "#473438",
+                        "background": "#1e0f12",
+                        "secondary-fixed-dim": "#f9abff",
+                        "outline-variant": "#5a4045",
+                        "surface-dim": "#1e0f12",
+                        "tertiary-fixed": "#79fe82",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#35003f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "4px",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "44px",
+                        "gutter": "12px",
+                        "container-padding": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "body-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .speed-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-top: -10px;
+        }
+        .speed-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: #333333;
+            border-radius: 2px;
+        }
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col">
+<!-- Top AppBar (JSON Authority) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding h-touch-target-min bg-background">
+<button class="flex items-center justify-center p-2 hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined text-on-background">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-background font-bold">Speed</h1>
+<button class="flex items-center justify-center p-2 hover:opacity-80 transition-opacity active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'wght' 700;">check</span>
+</button>
+</header>
+<!-- Preview Zone (45% height) -->
+<main class="relative h-[397px] w-full flex items-center justify-center overflow-hidden bg-black mt-touch-target-min">
+<div class="relative w-full h-full flex items-center justify-center bg-[#050505]">
+<img class="w-full h-full object-cover opacity-80" data-alt="A cinematic action shot of a professional urban athlete performing a dynamic mid-air parkour flip against a dark city skyline. The lighting is dramatic and high-contrast, emphasizing the sharp movement and sleek textures. The color palette is dominated by deep blacks and cool tones, punctuated by a vibrant pink and purple energy trail that follows the athlete's path. The overall mood is high-performance, technical, and intensely focused." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClId3SuC0HO1YM0qGe2fauhmbZSWpmsQYDx04K8rvV5V1JIxKoTSCdc66YVnfE6ulu9gOd6NwZCSVMbYpRgr2S0vwd-DPBum7CAlCHgmfqxLTES1FwsrmD2Ohj5MM400s9MfsG5g69RMGiV0Pfz7b2U7nyJiXYp5GKwpUdlEWkyhXPVU_8-QqSDXUY6VtStFxq6DcRf9ryMY_oCcv25aPJevZtms7bk21b069EClVAlfxeoCufKfH72v-xgqWc-wtspRrGGPvVS1o"/>
+<!-- Speed Badge Overlay -->
+<div class="absolute top-4 right-4">
+<div class="bg-[#FFD700] text-black px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>2x</span>
+</div>
+</div>
+<!-- Video Play Center Button -->
+<div class="absolute inset-0 flex items-center justify-center">
+<button class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white text-[40px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Speed Panel (55% height) -->
+<section class="flex-grow flex flex-col glass-panel border-t border-outline-variant">
+<!-- Tab Selector -->
+<div class="flex p-4 gap-2">
+<button class="flex-1 py-2 rounded-lg bg-white text-black font-label-md text-label-md transition-all" id="tab-normal">
+                Normal
+            </button>
+<button class="flex-1 py-2 rounded-lg bg-[#222222] text-on-surface-variant font-label-md text-label-md transition-all hover:bg-[#2a2a2a]" id="tab-curve">
+                Curve
+            </button>
+</div>
+<!-- Normal Tab Content -->
+<div class="flex-grow flex flex-col px-container-padding py-4" id="content-normal">
+<!-- Large Speed Display -->
+<div class="text-center mb-8">
+<span class="font-display text-display text-white tracking-tight" id="speed-value">2x</span>
+</div>
+<!-- Custom Slider Container -->
+<div class="relative w-full h-12 flex items-center mb-4">
+<!-- Visual Track Highlights -->
+<div class="absolute w-full h-1 bg-[#333333] rounded-full"></div>
+<div class="absolute h-1 bg-gradient-to-r from-primary-container to-[#9C27B0] rounded-full" id="slider-fill" style="width: 40%;"></div>
+<input class="speed-slider absolute w-full bg-transparent appearance-none cursor-pointer z-10" id="main-speed-slider" max="6" min="0" step="1" type="range" value="3"/>
+</div>
+<!-- Speed Labels -->
+<div class="flex justify-between px-1 mb-10">
+<span class="font-label-sm text-label-sm text-on-surface-variant">0.1x</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">0.5x</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1x</span>
+<span class="font-label-sm text-label-sm text-white font-bold">2x</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5x</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10x</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">100x</span>
+</div>
+<!-- Mode Toggle Row -->
+<div class="flex flex-col gap-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant">Pitch</h3>
+<div class="flex gap-3">
+<button class="flex-1 py-2 rounded-full border border-white text-white font-label-md text-label-md">
+                        Smooth
+                    </button>
+<button class="flex-1 py-2 rounded-full bg-white text-black font-label-md text-label-md">
+                        Normal
+                    </button>
+</div>
+</div>
+</div>
+<!-- Bottom Actions -->
+<div class="p-container-padding pb-8 flex items-center justify-between border-t border-outline-variant/30">
+<button class="text-on-surface-variant font-label-md text-label-md active:opacity-50 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                Reset
+            </button>
+<button class="px-8 py-3 bg-gradient-to-r from-primary-container to-secondary-container rounded-full text-white font-headline-md text-[14px] font-bold active:scale-95 transition-all shadow-lg shadow-primary-container/20">
+                Confirm
+            </button>
+</div>
+</section>
+<!-- Bottom Nav Suppression Check: Not a top-level destination, so suppressed as per "The Destination Rule" -->
+<script>
+        const slider = document.getElementById('main-speed-slider');
+        const fill = document.getElementById('slider-fill');
+        const speedDisplay = document.getElementById('speed-value');
+        const speeds = ['0.1x', '0.5x', '1x', '2x', '5x', '10x', '100x'];
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            const percentage = (val / 6) * 100;
+            fill.style.width = percentage + '%';
+            speedDisplay.innerText = speeds[val];
+            
+            // Subtle haptic feedback emulation
+            speedDisplay.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                speedDisplay.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Tab Switching Logic
+        const tabNormal = document.getElementById('tab-normal');
+        const tabCurve = document.getElementById('tab-curve');
+
+        tabNormal.addEventListener('click', () => {
+            tabNormal.className = 'flex-1 py-2 rounded-lg bg-white text-black font-label-md text-label-md transition-all';
+            tabCurve.className = 'flex-1 py-2 rounded-lg bg-[#222222] text-on-surface-variant font-label-md text-label-md transition-all hover:bg-[#2a2a2a]';
+        });
+
+        tabCurve.addEventListener('click', () => {
+            tabCurve.className = 'flex-1 py-2 rounded-lg bg-white text-black font-label-md text-label-md transition-all';
+            tabNormal.className = 'flex-1 py-2 rounded-lg bg-[#222222] text-on-surface-variant font-label-md text-label-md transition-all hover:bg-[#2a2a2a]';
+        });
+    </script>
+</body></html>

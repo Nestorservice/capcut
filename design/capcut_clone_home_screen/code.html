@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#5ce069",
+                        "secondary-container": "#86039c",
+                        "outline": "#a9888e",
+                        "on-primary": "#66002a",
+                        "surface-dim": "#1e0f12",
+                        "error": "#ffb4ab",
+                        "background": "#000000",
+                        "secondary-fixed": "#ffd6fe",
+                        "surface-container-low": "#27171a",
+                        "secondary-fixed-dim": "#f9abff",
+                        "on-background": "#f8dbe0",
+                        "surface-bright": "#473438",
+                        "surface": "#1e0f12",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "on-error": "#690005",
+                        "tertiary-container": "#0fa739",
+                        "surface-container-highest": "#423033",
+                        "on-primary-fixed": "#3f0018",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "on-secondary-fixed": "#35003f",
+                        "surface-tint": "#ffb1c1",
+                        "primary-fixed": "#ffd9df",
+                        "inverse-surface": "#f8dbe0",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "on-surface-variant": "#e2bdc3",
+                        "outline-variant": "#222222",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "on-tertiary": "#00390d",
+                        "error-container": "#93000a",
+                        "surface-variant": "#1c1c1c",
+                        "inverse-on-surface": "#3d2c2f",
+                        "on-secondary-container": "#f7a0ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#121212",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-tertiary-fixed": "#002105",
+                        "primary": "#ff4081",
+                        "on-primary-container": "#590024",
+                        "on-secondary": "#570066",
+                        "inverse-primary": "#bb0054",
+                        "surface-container-lowest": "#000000",
+                        "secondary": "#9c27b0",
+                        "on-tertiary-container": "#00320a",
+                        "on-surface": "#ffffff",
+                        "surface-container-high": "#362529",
+                        "tertiary-fixed": "#79fe82",
+                        "primary-container": "#ff4c86"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "touch-target-min": "44px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "headline-md-mobile": ["18px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["22px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #000000; color: #ffffff; -webkit-tap-highlight-color: transparent; }
+        .gradient-primary { background: linear-gradient(135deg, #ff4081 0%, #9c27b0 100%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-panel { backdrop-filter: blur(20px); background: rgba(10, 10, 10, 0.6); }
+        .active-tab-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            background-color: #ff4081;
+            border-radius: 9999px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-outline-variant/10">
+<div class="flex items-center justify-between px-container-padding h-14">
+<h1 class="font-display text-headline-lg-mobile text-on-surface tracking-tighter">CapCut</h1>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 transition-opacity duration-200 hover:opacity-80">
+<span class="material-symbols-outlined text-on-surface" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant border border-outline-variant/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a creative individual against a minimalist dark background. The lighting is dramatic and cinematic, highlighting the facial features with a soft glow that fits the sleek modernism of a high-end video editing application. The overall aesthetic is polished and high-contrast, perfectly complementing the pure black UI palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMMobn5cKuXBthp7RZmMqP5Z_s3paYxGRHjBBehIweU64mj0rKQTyfwaK87fbWqEK9cVohiDPVRCN4Jvrbf-mKR738aOBKpQxgmtWgBVk0qyZ9VDFkhUURxIlCMuH_sd_X4AjG95nVJSwMOqJfL0jBJavo1Bce8sPD-IisAhMd0H4JC9X85LvyhGR8hWAEzC4B1SmOvEOO-xHhzDEztIo_hvNu0cGHlEJ2DXQ52CGtasjZZrTeMixGv4ka3mUbf5h6xbQf36UK8lc"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-14 pb-20">
+<!-- Tabs Navigation -->
+<nav class="flex px-container-padding gap-6 h-12 items-center sticky top-14 z-40 bg-background">
+<button class="relative font-headline-md-mobile text-headline-md-mobile text-on-surface active-tab-indicator">For You</button>
+<button class="font-headline-md-mobile text-headline-md-mobile text-on-surface-variant transition-colors hover:text-on-surface">Following</button>
+</nav>
+<div class="px-container-padding space-y-6 mt-2">
+<!-- Hero Banner -->
+<section class="relative w-full h-32 rounded-xl overflow-hidden gradient-primary flex items-center p-6 group cursor-pointer transition-transform duration-300 active:scale-[0.98]">
+<div class="flex flex-col gap-1 z-10">
+<span class="text-white/80 font-label-md text-label-md">EXCLUSIVE</span>
+<h2 class="text-white font-headline-md-mobile text-headline-md-mobile leading-tight max-w-[200px]">New Feature: AI Background Remover</h2>
+</div>
+<div class="ml-auto bg-white/20 p-2 rounded-full backdrop-blur-sm group-hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+</section>
+<!-- New Project Button -->
+<button class="w-full bg-[#1c1c1c] rounded-xl p-4 flex items-center gap-4 border border-outline-variant/20 transition-all active:scale-[0.97]">
+<div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-[28px]" data-icon="add" style="font-variation-settings: 'wght' 600;">add</span>
+</div>
+<div class="flex flex-col items-start">
+<span class="text-on-surface font-headline-md-mobile text-headline-md-mobile">New project</span>
+<span class="text-on-surface-variant font-body-md text-body-md">Start from scratch</span>
+</div>
+</button>
+<!-- Recent Projects -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Recent Projects</h3>
+<button class="text-primary font-label-md text-label-md tracking-wide">See all</button>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar -mx-container-padding px-container-padding pb-2">
+<!-- Project Card 1 -->
+<div class="flex-shrink-0 w-[120px] group">
+<div class="relative w-[120px] h-[160px] rounded-lg overflow-hidden bg-surface-container border border-outline-variant/30 mb-2">
+<img alt="Project Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A cinematic still of a misty pine forest in the early morning, with soft ethereal light filtering through the trees. The image has a professional color grade with cool shadows and warm highlights, suggesting high-quality video production. The composition is vertical, fitting a mobile video project format, with a serene and moody atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB43QnIHqmTKPX2_jh6fonlikcDWX_Y456mn6wCVPFaze-P8-CrDB0TkFwwDfi_tUTIM3-covSyr9VL8qeQP_iABMWfn3sRnFWXU4cJKo6PWUYUVMVV_7duEbqOio0dj9L5OFK7DT4JhwyvFJqbiqkzz19JmCnfhrzksiWqT1-dIsJ8TeUR-KHhYU8kbF9jOHaiJpbVO_2_b1fg4U_8r_BqdUCRj86nsGQOJO_8gc8xrldoOG8x0xjH6RJLLr6Bcxf5pcaAbF4eP_0"/>
+<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-[10px] font-bold text-white">00:15</span>
+</div>
+<div class="flex justify-between items-start gap-1">
+<span class="text-on-surface font-label-md text-label-md truncate">Vlog_Summer_24</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="flex-shrink-0 w-[120px] group">
+<div class="relative w-[120px] h-[160px] rounded-lg overflow-hidden bg-surface-container border border-outline-variant/30 mb-2">
+<img alt="Project Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Vibrant neon lights of a bustling city street at night, reflected in rain-slicked pavement. The colors are dominated by electric blues and deep purples, creating a high-energy urban vibe. The sharp focus on the light reflections and the blurred background create a sophisticated depth of field suitable for a professional video editing showcase." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzEdgraHd4wROgodpNLqkx2FLCjaNdGJV6NfVVCFlQJ_0Lbnt6Ie7mS4fIFv3Ipqr8381Unfk5ImpJ3PNV6dawOk_3v3RSrU8is_kR1uTG8zQ1HxZ_HOiQGI8pVKeybTGZ2enKMqmGXp_ZTQ7E95s12jfDk5aFUez2o9g_XR_51pxniQUlh7iNNMubgP613ePC-snaog5bNS1-V9UbLR9_nGEbg5W82PtL8JKXS6-sqFHGFWE-YcOhd61zJ8qwbqUOp-GMOh_ayA"/>
+<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-[10px] font-bold text-white">01:04</span>
+</div>
+<div class="flex justify-between items-start gap-1">
+<span class="text-on-surface font-label-md text-label-md truncate">Neon_Nights_Final</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="flex-shrink-0 w-[120px] group">
+<div class="relative w-[120px] h-[160px] rounded-lg overflow-hidden bg-surface-container border border-outline-variant/30 mb-2">
+<img alt="Project Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A close-up, high-detail food photography shot of a steaming bowl of artisanal ramen. The lighting is focused and warm, highlighting the texture of the noodles and the rich broth. The background is a dimly lit, high-end restaurant setting with dark wooden accents, creating a professional and appetizing visual for a cooking vlog project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVPJe5brrmIbQMHRX8pMcJG71CWrs9lv-FBXcm_nfTjKJTolW-bq5-gmCcWibIhq6LPUyPQWVKbhbOxur1sW0ipcoe0boTt8opSrysrzxCN_WZu-xM7F_9mzzkk-IOqU9Ohl6OsatbE95nvNGr0fyYkTOC4CRX3ryYxqLo-aboRKAFZTin20ZBguGNpMh7faNSCMhwM_J8TY8rkMUnGaBa9LRhliHeNHH8hhci45AwuYcrC7azRM7gYQQC08Bdio8u5r9fmsriiKk"/>
+<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-[10px] font-bold text-white">00:42</span>
+</div>
+<div class="flex justify-between items-start gap-1">
+<span class="text-on-surface font-label-md text-label-md truncate">Cooking_Masterclass</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Templates -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Templates</h3>
+<button class="text-on-surface-variant font-label-md text-label-md tracking-wide">More</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar -mx-container-padding px-container-padding pb-4">
+<!-- Template 1 -->
+<div class="flex-shrink-0 w-[200px] h-[120px] rounded-xl overflow-hidden relative group cursor-pointer border border-outline-variant/20">
+<img alt="Template" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A breathtaking sunset over a calm mountain lake, with vibrant orange and pink clouds reflected in the mirror-like water. The aesthetic is peaceful and cinematic, using a wide aspect ratio that emphasizes the grandeur of the landscape. The color palette is rich and saturated, typical of high-quality travel templates used in video editing apps." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB86LInAL-IZDyfcaDZ8aRPnjbMOCjbKB67S538oInftp-HL28BKE8kDbFEmIRxiPBvjz7wbsrGSorPNLsCSTltiS306SNUMjo82GqAEWG2pHNLPU7m_k5U-pNPKA0x1tS80VVNBlZP-ah-BxwLOxWLv565EhYuj8Cxc1tlmWruRREC874Q2hfUJ0d-b_ez5f2M-wPLiydOoJDTH6qDMHPDJRCLAsfwfOTvORk2jx_nR55OsyfdZ6aPuRIGbl5cTEa5ekpApTkixUA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3">
+<span class="text-white font-label-md text-label-md font-bold">Cinematic Travel</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-white/70" data-icon="schedule">schedule</span>
+<span class="text-white/70 text-[10px]">12s</span>
+</div>
+</div>
+</div>
+<!-- Template 2 -->
+<div class="flex-shrink-0 w-[200px] h-[120px] rounded-xl overflow-hidden relative group cursor-pointer border border-outline-variant/20">
+<img alt="Template" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A retro-tech aesthetic featuring old computer monitors and cassette tapes bathed in glowing pink and blue synthwave lighting. The atmosphere is nostalgic yet modern, with high-contrast colors and a grainy texture that evokes a 1980s futuristic vibe. The composition is dynamic, perfect for high-energy rhythmic video templates." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtTXCxNt2ZCN5m2xM--wdohJozssD9tjy7I1SfcOkFIznk_mFt9fpg7FthrBPMM69TQxXxVT3i2Wi90ejVaym6Dl8rN9wKeZiYeIL7lpcEoGlQlgAmIxAmCmLYZCkr-k-_WhgnTahaZMYx_uYngDGAP7tI66AWsfW1frpKXi2gsgmxtlS1h0DqNypJy3P9UkhwJvks2U70zpDFBhMOzLK1SIR-yrGrlKesI5pD1Z7VDPILUpBJrSRjbPzkHKTs-z-uowCwDlD_8h4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3">
+<span class="text-white font-label-md text-label-md font-bold">Retro Glitch Beat</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-white/70" data-icon="schedule">schedule</span>
+<span class="text-white/70 text-[10px]">08s</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<footer class="fixed bottom-0 w-full z-50 bg-surface-container/90 backdrop-blur-xl border-t border-outline-variant/20 pb-safe">
+<div class="flex justify-around items-center h-16 w-full px-gutter">
+<button class="flex flex-col items-center justify-center text-primary font-bold transition-transform duration-100 active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-0.5">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim transition-transform duration-100 active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="add_circle">add_circle</span>
+<span class="font-label-md text-label-md mt-0.5">Create</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim transition-transform duration-100 active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="folder_open">folder_open</span>
+<span class="font-label-md text-label-md mt-0.5">Projects</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-fixed-dim transition-transform duration-100 active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-0.5">Me</span>
+</button>
+</div>
+</footer>
+<script>
+        // Micro-interaction for project cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.classList.add('scale-[0.98]');
+            });
+            card.addEventListener('touchend', () => {
+                card.classList.remove('scale-[0.98]');
+            });
+        });
+
+        // Tab selection logic
+        const tabs = document.querySelectorAll('nav button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active-tab-indicator', 'text-on-surface');
+                    t.classList.add('text-on-surface-variant');
+                });
+                tab.classList.add('active-tab-indicator', 'text-on-surface');
+                tab.classList.remove('text-on-surface-variant');
+            });
+        });
+
+        // Nav selection logic
+        const navItems = document.querySelectorAll('footer button');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => {
+                    i.classList.remove('text-primary', 'font-bold');
+                    i.classList.add('text-on-surface-variant');
+                    const icon = i.querySelector('.material-symbols-outlined');
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                });
+                item.classList.add('text-primary', 'font-bold');
+                item.classList.remove('text-on-surface-variant');
+                const icon = item.querySelector('.material-symbols-outlined');
+                icon.style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+    </script>
+</body></html>

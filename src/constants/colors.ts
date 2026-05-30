@@ -1,0 +1,63 @@
+export const Colors = {
+  bg: {
+    primary: '#000000',
+    secondary: '#0d0d0d',
+    card: '#1a1a1a',
+    elevated: '#1c1c1c',
+    toolbar: '#111111',
+    panel: '#161616',
+    input: '#2a2a2a',
+    overlay: 'rgba(0, 0, 0, 0.6)',
+  },
+  accent: {
+    pink: '#ff4081',
+    pinkDark: '#e91e63',
+    pinkLight: '#ff4c86',
+    purple: '#9c27b0',
+    purpleLight: '#bb0054',
+    gradient: ['#ff4081', '#9c27b0'] as [string, string],
+    gradientExport: ['#ff4081', '#e91e63'] as [string, string],
+    gradientNoir: ['#ff4c86', '#86039c'] as [string, string],
+  },
+  text: {
+    primary: '#ffffff',
+    secondary: '#888888',
+    tertiary: '#555555',
+    disabled: '#333333',
+    onSurface: '#f8dbe0',
+    onSurfaceVariant: '#e2bdc3',
+    pink: '#ff4081',
+    red: '#f44336',
+  },
+  editor: {
+    waveform: '#00e676',
+    musicTrack: '#ff4081',
+    trimHandle: '#FFD700',
+    cursor: '#ffffff',
+    clipBorder: '#ffffff',
+    selectedClip: '#FFD700',
+    keyframe: '#FFD700',
+    timelineBg: '#111111',
+  },
+  border: {
+    default: '#222222',
+    light: 'rgba(255, 255, 255, 0.1)',
+    medium: 'rgba(255, 255, 255, 0.2)',
+    outlineVariant: '#5a4045',
+  },
+  status: {
+    success: '#4caf50',
+    error: '#f44336',
+    warning: '#ff9800',
+    info: '#2196f3',
+  },
+  surface: {
+    container: '#121212',
+    containerLow: '#27171a',
+    containerHigh: '#362529',
+    containerHighest: '#423033',
+    variant: '#1c1c1c',
+  },
+} as const;
+
+export type ColorPalette = typeof Colors;

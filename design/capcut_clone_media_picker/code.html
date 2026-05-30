@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Media Selection - CapCut</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#86039c",
+                        "on-error": "#690005",
+                        "on-primary": "#66002a",
+                        "inverse-on-surface": "#3d2c2f",
+                        "surface-container-lowest": "#180a0d",
+                        "primary-fixed": "#ffd9df",
+                        "surface-variant": "#423033",
+                        "inverse-primary": "#bb0054",
+                        "surface-container-high": "#362529",
+                        "on-tertiary": "#00390d",
+                        "tertiary-container": "#0fa739",
+                        "outline-variant": "#5a4045",
+                        "on-primary-fixed": "#3f0018",
+                        "error-container": "#93000a",
+                        "on-surface-variant": "#e2bdc3",
+                        "on-secondary-container": "#f7a0ff",
+                        "surface-bright": "#473438",
+                        "on-tertiary-container": "#00320a",
+                        "tertiary-fixed": "#79fe82",
+                        "surface-container-low": "#27171a",
+                        "on-surface": "#f8dbe0",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#f9abff",
+                        "background": "#000000",
+                        "on-secondary-fixed": "#35003f",
+                        "surface": "#1e0f12",
+                        "secondary": "#f9abff",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "surface-container": "#1a1a1a",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-tertiary-fixed": "#002105",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#ff4081",
+                        "on-primary-container": "#ffffff",
+                        "on-secondary": "#570066",
+                        "secondary-fixed": "#ffd6fe",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "pure-black": "#000000"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "touch-target-min": "44px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "container-padding": "16px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Geist"]
+                    },
+                    fontSize: {
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["10px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "display": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        .selected-ring {
+            box-shadow: inset 0 0 0 2px #ff4081;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md select-none">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md px-container-padding flex items-center justify-between h-14 border-b border-white/5">
+<button class="flex items-center justify-center w-10 h-10 -ml-2 hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-white text-[24px]" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-md text-white">New project</h1>
+<button class="bg-primary-container text-on-primary-container font-label-md px-4 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+<span>Next</span>
+<span class="bg-white/20 px-1.5 rounded-full text-[10px]">(2)</span>
+</button>
+</header>
+<!-- Content Area with Tabs -->
+<main class="pt-14 pb-24 min-h-screen">
+<!-- Sticky Tabs -->
+<div class="sticky top-14 z-40 bg-background flex px-container-padding border-b border-white/5 h-12 items-center space-x-6">
+<div class="relative h-full flex items-center">
+<span class="text-white font-label-md">Video</span>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-container"></div>
+</div>
+<div class="h-full flex items-center">
+<span class="text-on-surface-variant font-label-md">Photo</span>
+</div>
+<div class="h-full flex items-center">
+<span class="text-on-surface-variant font-label-md">Live Photo</span>
+</div>
+</div>
+<!-- Media Grid -->
+<div class="media-grid mt-0.5">
+<!-- Camera Cell -->
+<div class="aspect-square bg-[#1c1c1c] flex flex-col items-center justify-center gap-1 group active:bg-[#2c2c2c] transition-colors">
+<span class="material-symbols-outlined text-white text-[32px]" data-icon="camera_alt">camera_alt</span>
+<span class="font-label-md text-white">Camera</span>
+</div>
+<!-- Item 1: Selected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A cinematic night scene showing vibrant neon city lights reflecting on wet asphalt in a cyberpunk aesthetic. The deep blacks of the environment are pierced by intense pink and purple glows, matching the app's primary color palette. Professional high-contrast photography with a dark, moody atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjB81tAZOB48dHrHhwFRwKq6X-HlHBAY7lfjQPMsCs0THHpq3gN_1mvvUBJSSXpfunvGLhP84SNjhb9ww_PZMPIUE9bMnJnX5FDRYuKri85DIvrKrIR3PQtUR9PNYdKJMNFgRZZ7vPwiOiOTUChK0hsMj1aou02mdVV_0_4G9xzX8j3gNdpfselLtc1fRjRfCKxp9m1pF0P7YSMAq48lr9QJG0JjeUQRDcjl3KxLioZr_THRP5hGJPw2t1MnTUO07AEu_89AnM8Bc"/>
+<div class="absolute inset-0 selected-ring"></div>
+<!-- Selection Badge -->
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary-container border-2 border-white flex items-center justify-center text-[12px] font-bold text-white">1</div>
+<!-- Duration -->
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:15</div>
+</div>
+<!-- Item 2: Selected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A high-end cinematic close-up of a professional camera lens capturing a sunset in the desert. The scene features deep shadows, warm orange glows on the horizon, and a sleek modern aesthetic. The lighting is sophisticated and moody, emphasizing textures and silhouettes against a pure black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA6S4lFUmuuXD9xGBE0jLOiD4SG3532O3UIWj9Y5R3ZJzsA-S5EykszepktHUKf66gQbh333cVKaBYYmhvgHdy6BjCjCcbF6pl4E4He6YhU-rYla3KjPI4r8XKz8KQlZnHnBmtcNHC4hQWHVXA7RbwSFlSyZVDE73CXVwhk3wfi71le8TUADPo0d79Q_GxtlpRl9IZs7h5iQ1TBUXD4w4uD9PVv-pxj_bmIRAMBHTJFiaqu2dRIhKL1JQFFMqbjrROMAW3mDsH_c8"/>
+<div class="absolute inset-0 selected-ring"></div>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary-container border-2 border-white flex items-center justify-center text-[12px] font-bold text-white">2</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:08</div>
+</div>
+<!-- Item 3: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Abstract slow-motion liquid ink swirling in water, creating organic shapes with vibrant pink and deep purple hues. The background is a stark, pure black that makes the colors pop intensely. The overall feel is artistic, fluid, and professional, characteristic of high-quality stock footage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz7XdGsplRqYrlk5dIj4OMhNdYYSUlsZmQqLDgzT7ZFmjzINonNxp9XFzpcDjaXH8d2eE0nxPZmsLVTkJCDLireCtJE8r-bWhz0wfX7HkoACeA0nQM5EVLMO5ZECrq_4UX1kTL5r5S3Q59M5Ujg6pGE2Hg-IuA6wvz1wlqsCft2YT9Jo7YsnUXgMC1ljoG3JEdzY9FVgON0pUPEiTXDEBTT0XCh2ywk0Mqs0X7W0K-2SSlx_NYS8vF-jd0ZMrtRDbc33QJ6xVdxaw"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:22</div>
+</div>
+<!-- Item 4: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A modern architectural structure with sharp geometric lines illuminated by subtle white light against a pitch-black sky. The composition is minimalist and precise, highlighting the metallic textures and professional design of the building. Deep shadows and high-key highlights create a sleek, futuristic look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE-K7XGfCTmO5cLtDqXXhbkhYRvmHyQY87IM-0rPOpx505IhzHA7r7Fo800g14suv_pxIMKplBvtZ_9hf51C3KpRF6qZbzMjVpzMxRMwcKLNEa90bmicwjVAM8pCPr-YsYcy4CHMWt0O6trftfV8o9fnM1qAw6ezktq9k_4r_f68-ku-11n__swZVPVUeNub5fcqTPE3LtlOULzYwaVGzY5S1ETIFll-TnAQpvvzEld8K0ypS8NzSLUXYF00wFW3UE39mobZHYB00"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:04</div>
+</div>
+<!-- Item 5: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Dramatic mountain peaks silhouetted against a dark, starry night sky. A faint pink nebulous glow is visible in the atmosphere, creating a connection to the brand's primary color. The landscape is immersive and cinematic, with professional-grade depth and clarity on an OLED-optimized background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLagYaJQgjuFvACjpmQkqzH5ZIqUW4HJGQhs9vMvJEgRMGpBxtJoWHimEMtULeYFw49XwP585NSLvfaf4EdsZ-ofXlCSOWjlrJpEMEW24aQyzGyU7MOJggcouAN9bSeguhvrBjIadVjWWcWD4e7LC5Lvj30t1xwpmNGoxLd9CACOgMRw_KyA-C38Qmon0ASb-lC3dzRDTv6GVpa16Ut0uI1f-FAJBKeJ79uwXboiFw8Y2c2J7mBZ-LsyyTR0BdhFvqTbLbso9nicM"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">01:10</div>
+</div>
+<!-- Item 6: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Retro tech setup featuring a glowing mechanical keyboard with pink and purple RGB lighting. The room is dark, with only the neon light from the electronics illuminating the scene. The aesthetic is modern-tech, precise, and sophisticated, targeting professional content creators and editors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGSAwzd7NHJq0PyJKwMtL5Dq1B8Y2DwACW6ub-IjKho_latfshcq1IiKG5xtXwfS0iJSOlUuc92QInYrcN2KEoRpZh5udtWLImLqDE0IV9hSJRBnwAn_d3gqZsymv-5JhsPtdsAUA78unOauhTG08U19xoOPWymwtJ81uE2lJl9ZT2yhacuuJV0Leh_kq7UwV1WMDQri1U4WSuijTmI371EZRkqWm1rytwYF8TKBbHFMIb0U6s5xe3wZjPvmjpCRjfLzHb0gS8r9U"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:15</div>
+</div>
+<!-- Item 7: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Close up of high-energy gaming visuals on a professional monitor, featuring explosions of color against dark backgrounds. The lighting is intense and dynamic, with motion blur suggesting speed and action. The style is professional, high-fidelity, and perfectly suited for a media selection tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTYt3indhO68NyRzvC7mMzMloUueA_ZgbgViXEHnXp8vi7GLUBwEbvD1exHuog_nFluF_FmL1CXaFr9hTS4JMTwYfT20u25R-3T3Q2vVXiRAtpWA0mJW_S8QNY9Yvug0uMc4RV3VO7gnIT0HpPa1sQkNtfEE3Mw0p_kZdYO6_dEG9RLBQGg6UlXxaNwJeMKeByCyzJ_1xxWC3_HuPzdCKqfesNa0OX27UlkEoQ9buBd2hO9fs-pUrAJuZCwdmgTo7SRr2QS_zo8B8"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:30</div>
+</div>
+<!-- Item 8: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A developer's coding interface showing vibrant syntax highlighting on a dark editor theme. The scene represents technical sophistication and precision, using deep blacks and sharp glowing accents of pink and green. The atmosphere is professional and focused, aligning with the tools of creative production." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ONLD4jJ0PST96PVB3rC5Og3-IZdKNWWKR0xQDKNnb0PYEumRMv1hDnZlJ9wmFwCY6eZf0T7BW6MxapXLiH20sDe05vInKXj7vJJ2GfDJgv-64vYxY4FqmvdUw0bg9IES8S993iBSFwrDUgUz6egaC4BSEWd_B88fwxOWyNgRJRKBNMf1NLr2Uiy7Y2IM9KmKlg9V2cMsbtMhA7aih8Sm91PJ1SH-K-NV6KADGUCRKcfQBrjeRAxOZMbHPMLGnLxkIbEae_u7JqM"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:12</div>
+</div>
+<!-- Item 9: Unselected -->
+<div class="relative aspect-square overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural interior with clean lines and soft ambient lighting that creates long, dramatic shadows. The space is sophisticated and modern, utilizing a palette of deep grays and blacks. The aesthetic is cinematic and high-end, evoking a sense of calm professional efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6bTEVR6Qu9ha-PribMLaCC1pjt4BHg-f6SCfwwCu365RqaHq4y8MueSiYNXalGCYgLs1BU0zNo0LsMpArZCtjjgwqgsUKgv4W7mTcPu5sWpBAD7VVy7YIDVTghyUjsZXIpW-GgAV9IS54XlShC3kY9by2zaHadA-YrQX0fWDWJVSxzH8gU5x8EvWxaWxbzJhpOhde4b_MNY5yUmZFgnu_BlCnQmaA6jj0VAVtnJWycgirydpGP9gcF6IBkHnHb7EzEVnKK520n5k"/>
+<div class="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/80 bg-black/20 flex items-center justify-center"></div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded-md text-[10px] text-white">00:05</div>
+</div>
+</div>
+</main>
+<!-- Floating/Docked Selection Bar -->
+<footer class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container border-t border-white/10 pb-safe-area-inset-bottom">
+<div class="flex items-center justify-between px-container-padding py-3">
+<!-- Selected Thumbnails List -->
+<div class="flex-1 flex items-center gap-3 overflow-x-auto hide-scrollbar mr-4">
+<!-- Thumbnail 1 -->
+<div class="relative flex-shrink-0">
+<div class="w-11 h-11 rounded-lg overflow-hidden border border-white/20">
+<img alt="Selected" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQh5VhyFgVKjxwuZz1Mjgl8ROsItNK86tC6SHHBHMmZOwmansgxRTHnBm4XY-h7QpG9H8OAuWHWtHJz9DW9IOihHgyYZYWsth0Kclu6TL-k9g2WYDoRG2Sw7GHSDmROxZhUgwFHPSZ9VjQFDCu-HvrubIiJPys5h4gW6aveh-143FgQ780WhS8YviBiBWgVZPOHBEitvKGb_XetGFXhqel3kq_gFTvtXlmYiVKz6vPVxDreWFyw7rmMyUVn4d_tgRERL5V2AelC4"/>
+</div>
+<button class="absolute -top-1.5 -right-1.5 bg-black/80 rounded-full w-5 h-5 flex items-center justify-center border border-white/20">
+<span class="material-symbols-outlined text-white text-[14px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Thumbnail 2 -->
+<div class="relative flex-shrink-0">
+<div class="w-11 h-11 rounded-lg overflow-hidden border border-white/20">
+<img alt="Selected" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLVEAANIEPfnOkRyCADDlGidPPyoMPR55wh3h6jvWwJ_vKyEOmoTEVDrSGkox9y-8JinGFAzBj3S5ypQ0giBBaulaZ4CIEYqAolv2sn2Gchn6GlZ7eeHuJZ8n5wBmR76rhT_Ae4kq47tcWp2krqKjnfdBPxWTR7JmuwlFSAujaFb36rp6dmjOcFDYTxGHgoAUrw_W7Doha-h6w2TBJZFHJOxxH_JxcJu8btWllhvMlUUtnTkegN6bqfeYIBiGTjKCD4KpdwQG3_e0"/>
+</div>
+<button class="absolute -top-1.5 -right-1.5 bg-black/80 rounded-full w-5 h-5 flex items-center justify-center border border-white/20">
+<span class="material-symbols-outlined text-white text-[14px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Add Button -->
+<button class="bg-primary-container text-white rounded-xl py-3 px-6 flex items-center justify-center gap-2 font-headline-md active:scale-95 transition-transform">
+<span>Add</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for item selection
+        document.querySelectorAll('.media-grid > div:not(:first-child)').forEach(item => {
+            item.addEventListener('click', () => {
+                // In a real app, this would toggle selection state
+                // For this demo, we just add a small click effect
+                item.style.opacity = '0.5';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

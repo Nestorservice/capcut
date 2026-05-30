@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Kinetic Noir - Sticker Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#ffb1c1",
+                        "surface-variant": "#423033",
+                        "on-tertiary-fixed": "#002105",
+                        "surface-bright": "#473438",
+                        "on-primary": "#66002a",
+                        "on-primary-fixed": "#3f0018",
+                        "background": "#000000",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "surface": "#1e0f12",
+                        "on-tertiary-container": "#00320a",
+                        "tertiary-container": "#0fa739",
+                        "surface-container-low": "#27171a",
+                        "primary": "#ffb1c1",
+                        "on-tertiary": "#00390d",
+                        "secondary-container": "#86039c",
+                        "surface-tint": "#ffb1c1",
+                        "primary-fixed": "#ffd9df",
+                        "surface-container-lowest": "#0d0d0d",
+                        "secondary": "#f9abff",
+                        "on-secondary-container": "#f7a0ff",
+                        "inverse-primary": "#bb0054",
+                        "on-secondary": "#570066",
+                        "surface-dim": "#1e0f12",
+                        "secondary-fixed-dim": "#f9abff",
+                        "on-surface": "#f8dbe0",
+                        "on-error-container": "#ffdad6",
+                        "on-surface-variant": "#e2bdc3",
+                        "secondary-fixed": "#ffd6fe",
+                        "on-primary-container": "#590024",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "on-secondary-fixed": "#35003f",
+                        "surface-container": "#2b1b1e",
+                        "primary-container": "#ff4c86",
+                        "outline": "#a9888e",
+                        "on-background": "#f8dbe0",
+                        "outline-variant": "#5a4045",
+                        "surface-container-highest": "#423033",
+                        "inverse-surface": "#f8dbe0",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "error-container": "#93000a",
+                        "tertiary": "#5ce069",
+                        "surface-container-high": "#362529",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "inverse-on-surface": "#3d2c2f",
+                        "tertiary-fixed": "#79fe82",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "12px",
+                        "touch-target-min": "44px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Geist', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-selected-border {
+            border: 1px dashed white;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 0px;
+            width: 0px;
+        }
+        .neon-glow-pink {
+            filter: drop-shadow(0 0 8px rgba(255, 76, 134, 0.6));
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+<!-- Top AppBar (from JSON guidance mapping) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-container-padding h-touch-target-min bg-background border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-background">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-background font-bold">Stickers</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform p-2 bg-primary-container rounded-full">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">check</span>
+</button>
+</header>
+<!-- Canvas (Top 40%) -->
+<main class="relative h-[40vh] mt-[44px] bg-black flex items-center justify-center overflow-hidden">
+<div class="relative aspect-square h-full max-h-[35vh] overflow-hidden rounded-lg shadow-2xl border border-outline-variant/20">
+<!-- Video Preview Container -->
+<img alt="Cinematic video preview" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uivB-0G8a6NWc_bZf9db3WQiLXzEHBnqAqNKAP5fzC-p4JsGChgG699hMfpHbjfVRkcmVD-ntdGFyx4Ka6fnHL_rNRdpGdwRg3vIpa6mSNOUMsn8mggO-QhSDHFFfdLBNQKiCyY5INyigWmysb8kRcfF-suTDhGTF2VoJdde7EXLGZ3azLQi0UE-1KssiMvJIBVW7B3UMwzh2QPgc9HzwqVvcerue_dlBRSsTL_AITFNfbo13iJos7Ilpw"/>
+<!-- Overlay Sticker with interaction handles -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 flex items-center justify-center sticker-selected-border group cursor-move">
+<!-- Selected Sticker (Star Burst from Image 37 concept) -->
+<div class="w-24 h-24 bg-no-repeat bg-contain bg-center neon-glow-pink" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXnnSKej9u-OvMNqWU09f3dAQUNwZWuhRj87sMKnj-hI28MZReNBy-1FcYEb1tKHFWGGh0-C-sJXx4fDEh2v4JE78e7Jo_jsYID6fkjFz2_1DruA2sjAza970SOxg2BpCU2CsTLPDA0JkxLTJOV4zVxv9fbN-Ipm25qlAqdjz0yDx9RnMAmlcueo_X-V_UYwS7YyX1QzyXAQo4ErJbPqPccoCnPWvo8Q34W0SwCFpeC8V6Ueg1GyaKNypRVXpOJLkBOK19vCpvjhI');">
+<!-- Using a symbolic placeholder as Image 37 is the user prompt source, this simulates the 'star burst' placement -->
+</div>
+<!-- Handles -->
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 w-px h-6 bg-white"></div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full border border-black flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-black">refresh</span>
+</div>
+<div class="absolute -top-1 -left-1 w-3 h-3 bg-white rounded-full border border-black"></div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border border-black"></div>
+<div class="absolute -bottom-1 -left-1 w-3 h-3 bg-white rounded-full border border-black"></div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary rounded-full border border-black flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-on-primary font-bold">open_in_full</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticker Panel (Bottom 60%) -->
+<section class="flex-grow bg-surface-container-lowest rounded-t-3xl overflow-hidden flex flex-col shadow-inner">
+<!-- Search & Categories -->
+<div class="px-gutter pt-4 space-y-4">
+<!-- Search Bar -->
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/60">search</span>
+<input class="w-full bg-[#1a1a1a] border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-1 focus:ring-primary transition-all" placeholder="Search stickers..." type="text"/>
+</div>
+<!-- Categories -->
+<div class="flex gap-4 overflow-x-auto custom-scrollbar pb-2">
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-primary">
+<span class="material-symbols-outlined p-2 bg-primary/10 rounded-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">Trending</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">schedule</span>
+<span class="font-label-sm text-label-sm">Recent</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">mood</span>
+<span class="font-label-sm text-label-sm">Expressions</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">category</span>
+<span class="font-label-sm text-label-sm">Shapes</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">movie</span>
+<span class="font-label-sm text-label-sm">Film</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">sunny</span>
+<span class="font-label-sm text-label-sm">Nature</span>
+</button>
+<button class="flex flex-col items-center gap-1 min-w-[56px] text-on-surface-variant/60 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined p-2">games</span>
+<span class="font-label-sm text-label-sm">Gaming</span>
+</button>
+</div>
+</div>
+<!-- Sticker Grid -->
+<div class="flex-grow overflow-y-auto px-gutter py-2">
+<div class="grid grid-cols-4 gap-3">
+<!-- Trending Stickers populated as placeholders for assets from provided image source -->
+<div class="w-[72px] h-[72px] bg-[#1a1a1a] rounded-lg border-2 border-primary-container flex items-center justify-center p-2">
+<div class="w-full h-full bg-no-repeat bg-contain bg-center opacity-90" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDq27sTCx1i76xlv_xptNQGynk3tN87UX2zsBZz3v_YUs1QAMiRYM6xTIFi2iab7qHFr6ZPSc7aCf4EYuw8iJRMQ0vITuaSIhpI_YnlQDlzTj2CRjZ1p-SF9EeVVqil31hyMjtW6pQH_2Ar2yRNwPWtKHDYciWEeSIJxc_jr7BivERBKF349KdttG4MajlSoiFE9REFTu5e57Wm_0Yhor2XkPTjYIsadZXkJArXZkcIT_tswIoEp82laoGN0xfGR68ZV9LUg7SaUVE');"></div>
+</div>
+<div class="w-[72px] h-[72px] bg-[#1a1a1a] rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-colors flex items-center justify-center p-2">
+<div class="w-full h-full bg-no-repeat bg-contain bg-center rotate-45" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBDaokX-3lwvrwBl2ujBzT6TwW3ehM0_GTQ-qMT-1zMnmzQaypknGf3K3YmIeh8MuuYltTOpSMQxLqUkLxOHPfHOC1NGDXyWdMFkFJn7zfGm1_RWjGFQL40bHUy_b02KzbucL0yJcFOmoUH9rBWNEswZdo4hKKhyh_Q1_een7UvHB2oRVIpdZME9PC3Wjazj6ZuiQJAj00p7lx9iio8J6c-s7NvJEein3m52isF_BfmSA0Y-jmd7Y2Vgp4X6jD5UXwZAk7iP4pl-fk');"></div>
+</div>
+<div class="w-[72px] h-[72px] bg-[#1a1a1a] rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-colors flex items-center justify-center p-2">
+<div class="w-full h-full bg-no-repeat bg-contain bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQscp_W68iAUv3xRBxUpX1SJ0Msod2n8h4M59HqpCtLaAVc66z9_PUE_Sro2AyO8e1sne4yokjh3vTIZy13znBq0VabVWzuqfDWhH-pCCk7rxZ5OTDFgZv-2HiQ2nEoyYIFSaSMYh3wJjWb47VmP4MHXgoABcUkoXaMsjMGGY-uuRniBEzxCIJKkMNr3MSN899Xaonw1G1EECl368iClO34PHO4QKs5ls3QvSelk71qu-U6OldhamAw2gw0U_yG-QoSWf2kvqv1b4');"></div>
+</div>
+<div class="w-[72px] h-[72px] bg-[#1a1a1a] rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-colors flex items-center justify-center p-2">
+<div class="w-full h-full bg-no-repeat bg-contain bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDq_UjH8k4PyjF50ft37pi8NjnNvqRZ0t4VJOdbW6eCm2HzqqlXF7p3xKd0HEXtm_Gw72AyJcLPP9MXjA2rlGvvYQ_ykfwJ-HgE3k--DmcDOL7kgsq7OXRpR4vnBTnAtG4-9-GANWoXZ49I1Z80poLbvKWB2tmm_-71sl3PcpKfffOvJMkqhhhhsN9t2C6A2x1hbj7Ksy9Gt9xG1ezBcvI3nzr7NR-lpxlXkWoK4e1HXdQg1E7JL1MzFB5hb_BjqBEoXskiaE5gWjw');"></div>
+</div>
+<!-- Fill the rest for scroll simulation -->
+<script>
+                    const container = document.querySelector('.grid');
+                    for (let i = 0; i < 16; i++) {
+                        const cell = document.createElement('div');
+                        cell.className = "w-[72px] h-[72px] bg-[#1a1a1a] rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-colors flex items-center justify-center p-2";
+                        const inner = document.createElement('div');
+                        inner.className = "w-full h-full bg-slate-800/40 rounded-sm animate-pulse";
+                        cell.appendChild(inner);
+                        container.appendChild(cell);
+                    }
+                </script>
+</div>
+</div>
+</section>
+<!-- Bottom Bar (Duration Control) -->
+<footer class="h-20 bg-background border-t border-outline-variant/20 px-container-padding flex flex-col justify-center gap-1 z-50">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Duration</span>
+<span class="font-label-md text-label-md text-primary font-bold">2.0s</span>
+</div>
+<div class="relative w-full h-6 flex items-center">
+<div class="absolute w-full h-1 bg-outline-variant/30 rounded-full"></div>
+<div class="absolute w-[40%] h-1 bg-primary-container rounded-full"></div>
+<div class="absolute left-[40%] -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg border border-primary/20"></div>
+</div>
+</footer>
+<!-- Bottom Nav (Contextual Suppression Logic Applied - suppressed as this is a sub-task modal) -->
+<!-- Not rendering BottomNavBar because we are in a task-focused sticker sub-page -->
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('.grid > div').forEach(sticker => {
+            sticker.addEventListener('click', () => {
+                document.querySelectorAll('.grid > div').forEach(s => s.classList.replace('border-primary-container', 'border-outline-variant/20'));
+                sticker.classList.replace('border-outline-variant/20', 'border-primary-container');
+                sticker.classList.add('border-2');
+            });
+        });
+
+        // Category switching interaction
+        const categoryButtons = document.querySelectorAll('.overflow-x-auto button');
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => {
+                    b.classList.remove('text-primary');
+                    b.classList.add('text-on-surface-variant/60');
+                    b.querySelector('span').classList.remove('bg-primary/10');
+                    b.querySelector('span').style.fontVariationSettings = "'FILL' 0";
+                });
+                btn.classList.add('text-primary');
+                btn.classList.remove('text-on-surface-variant/60');
+                btn.querySelector('span').classList.add('bg-primary/10');
+                btn.querySelector('span').style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+    </script>
+</body></html>

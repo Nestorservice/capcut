@@ -66,6 +66,14 @@ yarn-error.log
 # testing
 /coverage
 
+# Environment
+.env
+.env.local
+.env.production
+
+# CapCut output
+android/app/src/main/assets/
+
 # Yarn
 .yarn/*
 !.yarn/patches

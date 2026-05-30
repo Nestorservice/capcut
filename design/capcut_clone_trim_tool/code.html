@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Kinetic Noir - Trim Tool</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Geist:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .trim-handle-shadow {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        .video-gradient-overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "error-container": "#93000a",
+                "surface-tint": "#ffb1c1",
+                "surface-container": "#2b1b1e",
+                "on-background": "#f8dbe0",
+                "surface-container-high": "#362529",
+                "secondary-fixed-dim": "#f9abff",
+                "on-tertiary-fixed-variant": "#005317",
+                "on-primary-fixed": "#3f0018",
+                "on-error-container": "#ffdad6",
+                "surface-container-lowest": "#180a0d",
+                "inverse-on-surface": "#3d2c2f",
+                "on-tertiary": "#00390d",
+                "on-primary-container": "#590024",
+                "surface-variant": "#423033",
+                "primary": "#ffb1c1",
+                "surface-dim": "#1e0f12",
+                "on-error": "#690005",
+                "inverse-primary": "#bb0054",
+                "tertiary-fixed": "#79fe82",
+                "error": "#ffb4ab",
+                "surface-container-low": "#27171a",
+                "outline": "#a9888e",
+                "outline-variant": "#5a4045",
+                "tertiary": "#5ce069",
+                "surface-container-highest": "#423033",
+                "on-secondary": "#570066",
+                "tertiary-container": "#0fa739",
+                "primary-fixed-dim": "#ffb1c1",
+                "on-primary": "#66002a",
+                "on-tertiary-fixed": "#002105",
+                "inverse-surface": "#f8dbe0",
+                "primary-container": "#ff4c86",
+                "on-primary-fixed-variant": "#8f003f",
+                "background": "#1e0f12",
+                "surface-bright": "#473438",
+                "secondary-fixed": "#ffd6fe",
+                "primary-fixed": "#ffd9df",
+                "on-secondary-fixed": "#35003f",
+                "tertiary-fixed-dim": "#5ce069",
+                "on-surface-variant": "#e2bdc3",
+                "on-secondary-fixed-variant": "#7b008f",
+                "surface": "#1e0f12",
+                "on-tertiary-container": "#00320a",
+                "on-secondary-container": "#f7a0ff",
+                "secondary-container": "#86039c",
+                "secondary": "#f9abff",
+                "on-surface": "#f8dbe0"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "unit": "4px",
+                "touch-target-min": "44px",
+                "gutter": "12px",
+                "container-padding": "16px"
+              },
+              "fontFamily": {
+                "label-md": ["Geist"],
+                "headline-lg": ["Hanken Grotesk"],
+                "label-sm": ["Geist"],
+                "display": ["Hanken Grotesk"],
+                "headline-md": ["Hanken Grotesk"],
+                "body-md": ["Geist"],
+                "body-lg": ["Geist"]
+              },
+              "fontSize": {
+                "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                "headline-lg-mobile": ["20px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                "headline-md-mobile": ["18px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-screen w-full flex flex-col font-body-md text-on-surface">
+<!-- TOP BAR (Shared Component Context) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-black">
+<button class="w-10 h-10 flex items-center justify-start active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white text-[28px]">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-white font-bold">Trim</h1>
+<button class="w-10 h-10 flex items-center justify-end active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[#ff4081] text-[28px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</button>
+</header>
+<!-- PREVIEW ZONE (Top 50%) -->
+<main class="flex-1 flex flex-col bg-black relative pt-14">
+<div class="flex-1 w-full flex flex-col items-center justify-center p-gutter">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden bg-surface-container-lowest ring-1 ring-white/10 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A cinematic night-time view of a sprawling metropolis street illuminated by neon signs and glowing skyscrapers. The atmosphere is atmospheric and moody with deep shadows and vibrant pink and purple highlights reflecting off wet pavement. High-performance professional videography aesthetic with soft lens flare and cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH_mAi-IFn1QSfbKJR7MR__5OC241g53Yv0ybosShvYMP7ma3Ufvr34IXdaCt8nQ0XzFRiEjg6KG3rDSIJR7TSI_2whA1iqXFSOAQt_X6vZhijX1aEnrF-iPCtOKeZY5eQZ08NUKNKFkiczXjaERPH2qo9XXOUvuRLWJNeg8rHiAZxEWO0LAiQQhBknYeKssmqRcGLXwfMNIs62SfkSA5FVp9Jar3Y2vYX4dySyoFLL-UyX4fue5lcTk8w5XueMidstdEpdR2Pgnk"/>
+<div class="absolute inset-0 video-gradient-overlay pointer-events-none"></div>
+<!-- Play Button Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+<span class="material-symbols-outlined text-white text-4xl ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<!-- Timestamp -->
+<div class="mt-4">
+<span class="font-mono text-white text-xl font-bold tracking-widest">00:05</span>
+</div>
+</div>
+</main>
+<!-- TRIM PANEL (Bottom 50%) -->
+<section class="h-[50%] bg-[#161616] flex flex-col border-t border-white/5 rounded-t-[32px] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex-1 px-container-padding flex flex-col justify-center gap-8">
+<!-- Trim Strip Container -->
+<div class="relative w-full">
+<div class="h-16 w-full rounded-xl overflow-hidden relative flex items-center bg-black/40 ring-1 ring-white/5">
+<!-- Thumbnails Strip -->
+<div class="absolute inset-0 flex w-[200%] gap-0.5 opacity-40">
+<!-- Simulated video frames -->
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a city skyline at dusk with deep orange and purple tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBY6uYrNxMRcJklSW7Soh2SQCklkETV3cmsDZppcnjZNvLwPlq-GPGTmEaj_BEoULu3Xr_Cd2J1zd1ZSFoYkwlGeBp3O7Kh-M8bgem2JVRBsj7_vzwQUTD-3HSx2LYNRQV31kmQ8BcO_MG_Gt-ziC8-Duj_9Uk7oyN1nstcd8Ym5sUeuzIoqdqnWgjsTdtA4Hn7_xsrN2ybjCkw1EDyJ3JtgYVSTbLIzWZg4RB_S7N5upuEMm9t4GWo1h9JHd-g4eWpFnSSbZgT1s4')"></div>
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a suspension bridge at night with dramatic street lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADUXReMeniPkRpUwYj0-eFlAo3278CorzAgQSZBhVtNcQgSdvrhCIBeBT6h04FXpuHvJgCO2cAUosRqWsEMw-xGFvJMYOS9xgwPT2PHJ2kxP8Gr1qYdkl-polAbZiQr2nTeVjPosVTmZ9Ov7oR1CV43ViioY-j-aWVgY3bYc8TnfAztswsvJCx_MiFpUY5dyaVFCehAmvGsUBC-Bn8AO16ebg7A-xu-JgiDK0IkfW4280a6wNGDgPUR6dnt0c9UfFVCa7GIdtqUSA')"></div>
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a car interior with glowing dashboard lights and night city bokeh." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8RJEv-iYpS7oa-zVPNbuIoZV8sq5_P9B7Rre4xN6fg2C0eIHe8M8mXPReEB4ZhTvjQD5vBQU9WXCCo02-k7rjYaIXoDXWOc-dnnrua9VQpkOiPCpSLDI0Sypy-UNaLKa5jkA7MiZHNLf0JyLHVOnUnXHotzPWM7YS27aJ-vk8fK96zuJhePmnFxmSacPtEKg5xJvK9Qj5lWWSYkU5_JyeKpNMqLwAVrTtw6VtpEy7Nfx5o0jI4HRiVBOq3qxrLn3GSUDb7DlFokc')"></div>
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a concert stage with intense colored spotlights and haze." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBViqRfVcOKPLYFNtV_QY-8yVzYiICXCSiRw1XdrIkj1kBz1drjEeKqoGQgg5G1GuUHpajX5oT0f-1BMtgRVDe9vE8mBzILFsPmJqWgykwtlWT3NkSsYhbuLaiuCN7__lQHr-A1U5MsU9NAYHD1oRFz5zJzobFxx1dnUhMBglF7nirXKnACqBqWmFTH-6srMn_HovoH2w4sQGVsRgrEzgA3jiQGWDxlq_UiXMSclkbaUPnr69UBm0FuUxmsSeHRwlb-pyQSrzEkOyA')"></div>
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a neon-lit alleyway in Tokyo with vibrant signs and reflections." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVKZH_dVUhB9fbDnnmRcEH3fuidQ8Y_k-QDmTUaCYvpbmtajigSs6vIWVXe0_tPE9a30xJg7flj31p_uLYE69NCuUCxyZ1_PNRm3ZVh3STh3qWYjjib5nDCjkjdLaB5M3MEvigAOaaBzMzNbzqsfw1TswfsPk4qWichpTZU_gyNQUzlrrn1we9ZGdJBce-tnbROQdYVMFcHnuyAFTg4dy2Jxhr6ds8Yd6CIDRMjT3vsNI2Dh2eH8D7Ov_XE7Y13R7CS7CJq1gVRn0')"></div>
+<div class="h-full w-16 bg-cover bg-center" data-alt="Small cinematic thumbnail frame of a futuristic architectural structure with clean lines and soft lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTE791_7ZWYJy7MLDoUeUTmp_bHqBpxN7HdgN09F_yc5qUcvg-u7RAjTEtHiFFNxEbsNhrvOBpqnTuxK3iLr_DTGMRVeTQScnnXaoAnKiPV_WGH8CO15dofoNZu5lGZqCHhYBc4nIwssid3Qb9rw5riZ7sLkUKJKQ4XcAZrUJFGPNFJYtZ081NEkNlvCH_Kow2zdtIYscdJy5OItG94U8v25X8J71NgsmrL5OdVYxTLJMXf6Axtbj8_KOoucjUDfzMXQsAN61boKM')"></div>
+</div>
+<!-- Highlighted Region (Selected) -->
+<div class="absolute left-[15%] right-[25%] h-full flex overflow-hidden ring-2 ring-[#FFD700] z-10">
+<div class="flex w-[200%] h-full gap-0.5 -ml-[30%]">
+<div class="h-full w-16 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRY3HOXHooMrkdkA857Eza37dS781hvJaziAnrXBeiq5DEypRs8df2lBndTWqOxWfqGftSuuQNSZj8UOUQPmebnQhYnE3JBfVWqezlH_DOKRBR4Gu5gKrpA9pZjbCQsi5E1xD0THYozoeZWnpaZtp2qK7_-vQZN4Fo8f59G-b9_jvU5CBX0zMDpQibLoc5md8TYgbobDW7AqHpGRVJDOIz0urIZ6QG7yQ9Dv2XZJUGI57bIegW8DCy4g-H1Z2-49QLKj1mEYw6C6M')"></div>
+<div class="h-full w-16 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHgTO-1auHT6t_aZOJaunGTOuzaFzvTN28kSj2_G-KpMgdCYKSRxxkarYF5KXmPWEGwDvuP4kz9Ar1ZLVQ-dKLfnel-RuOAn2C930vdj3OU0BNblbDfrcUsCX88vz9XvUd6j8ejwdmoHjPujkCrG9Gw-bm9waAt1pS2VkJAVO0Bv28uyqYsAlmurFxg_PaUjzaVRG6_Ee4gpWHKl1r-h3rdBkhbvqHxSy6L_c69FJDzFBjakZdjNzcjT2JmtsuL5FXAuifB7lIt5M')"></div>
+<div class="h-full w-16 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJDQFIMgztpoAjSM7bRghTQnYNlAtZfm7JWvLdwnBWIZylphMDeO3NIlaLyHDCJU8DmxaLwfdHqiNI1-1fMcbDB0xFJtwPvz0c6YOAmHeMJ6dgpDAFqx7mnl8Udb0CDdCEewQvf6aD-mXdO-5kO4W7ic62Tzs6x7O4kTK__KT62PiSE9DR3ANR8oco9GcG4YCyFMLxg0gmYJSe7pgp57GgtMpeq5lrhGBBagpRdVDkly06Bth7A7SQZ-VaOvlD-QydVF3J300B7fg')"></div>
+<div class="h-full w-16 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrjeN4LzMh4SKU4bqUAHHUgIF5Y05l1k5KWpmOfCdmFcCS3QK5BFE-1Y02OPeAnb1MGoMLYDVljr2OumF1SKxXxR-ULn-ek-kZLfG_sbaG0dyHhmF5pNdVZDMVRo3nZDeA-nYq39xUnECyF2wfQGvn9HOXgWH1P0f6hmUyY6yi6P6oUGxYtH3_XtBHIrzgkh2z8AMKrnrezdxfL7nsKmCtprh919E823ER5U3E3BvHHhhO3czcsfOoo2CfwAwVs2zjlZVzLhCZhBg')"></div>
+</div>
+</div>
+<!-- Handles -->
+<!-- Left Handle -->
+<div class="absolute left-[15%] top-0 h-full w-[24px] z-20 -ml-[12px] flex items-center justify-center cursor-grab active:cursor-grabbing">
+<div class="h-full w-[6px] bg-[#FFD700] rounded-sm trim-handle-shadow flex items-center justify-center relative">
+<div class="absolute -left-4 w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#FFD700] text-[16px]">chevron_left</span>
+</div>
+</div>
+</div>
+<!-- Right Handle -->
+<div class="absolute right-[25%] top-0 h-full w-[24px] z-20 -mr-[12px] flex items-center justify-center cursor-grab active:cursor-grabbing">
+<div class="h-full w-[6px] bg-[#FFD700] rounded-sm trim-handle-shadow flex items-center justify-center relative">
+<div class="absolute -right-4 w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#FFD700] text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Current Position Cursor -->
+<div class="absolute left-[40%] top-[-8px] bottom-[-8px] w-[2px] bg-white z-30 shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white"></div>
+</div>
+</div>
+</div>
+<!-- Time Values Row -->
+<div class="flex justify-between items-center w-full px-2">
+<div class="flex flex-col items-center">
+<span class="font-mono text-outline text-body-md font-medium">00:00</span>
+<span class="font-label-sm text-label-sm text-outline-variant/60 uppercase tracking-widest mt-1">Start</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-mono text-white text-headline-md font-bold">00:15</span>
+<span class="font-label-sm text-label-sm text-outline-variant/60 uppercase tracking-widest mt-1">Duration</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-mono text-outline text-body-md font-medium">00:15</span>
+<span class="font-label-sm text-label-sm text-outline-variant/60 uppercase tracking-widest mt-1">End</span>
+</div>
+</div>
+<!-- Speed Pill -->
+<div class="flex justify-center">
+<button class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-white/5 active:scale-95 transition-all">
+<span class="font-label-md text-label-md text-white">1x</span>
+<span class="material-symbols-outlined text-outline-variant text-[14px]">speed</span>
+</button>
+</div>
+</div>
+<!-- ACTION BUTTONS -->
+<div class="p-container-padding grid grid-cols-2 gap-4 pb-10">
+<button class="h-12 flex items-center justify-center bg-[#2a2a2a] rounded-xl active:opacity-70 transition-opacity">
+<span class="font-headline-md-mobile text-headline-md-mobile text-white font-semibold">Cancel</span>
+</button>
+<button class="h-12 flex items-center justify-center bg-gradient-to-r from-[#ff4081] to-[#e91e63] rounded-xl active:scale-[0.98] transition-transform">
+<span class="font-headline-md-mobile text-headline-md-mobile text-white font-bold">Confirm</span>
+</button>
+</div>
+</section>
+<script>
+        // Micro-interaction for the confirm button glow
+        const confirmBtn = document.querySelector('.bg-gradient-to-r');
+        confirmBtn.addEventListener('touchstart', () => {
+            confirmBtn.style.boxShadow = '0 0 20px rgba(255, 64, 129, 0.4)';
+        });
+        confirmBtn.addEventListener('touchend', () => {
+            confirmBtn.style.boxShadow = 'none';
+        });
+
+        // Simple animation simulation for the trimmer
+        let currentPos = 40;
+        const cursor = document.querySelector('.bg-white.z-30');
+        
+        function moveCursor() {
+            currentPos += 0.1;
+            if (currentPos > 75) currentPos = 15;
+            cursor.style.left = `${currentPos}%`;
+            requestAnimationFrame(moveCursor);
+        }
+        // Uncomment to enable live playhead simulation
+        // moveCursor();
+    </script>
+</body></html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Noir - Export Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "inverse-primary": "#bb0054",
+                      "surface-variant": "#423033",
+                      "primary": "#ffb1c1",
+                      "on-tertiary": "#00390d",
+                      "on-primary-container": "#590024",
+                      "surface-dim": "#1e0f12",
+                      "surface-container-lowest": "#180a0d",
+                      "inverse-on-surface": "#3d2c2f",
+                      "error-container": "#93000a",
+                      "surface-container-high": "#362529",
+                      "secondary-fixed-dim": "#f9abff",
+                      "on-tertiary-fixed-variant": "#005317",
+                      "on-primary-fixed": "#3f0018",
+                      "on-error-container": "#ffdad6",
+                      "surface-tint": "#ffb1c1",
+                      "surface-container": "#2b1b1e",
+                      "on-background": "#f8dbe0",
+                      "tertiary-container": "#0fa739",
+                      "primary-fixed-dim": "#ffb1c1",
+                      "on-primary": "#66002a",
+                      "on-secondary": "#570066",
+                      "outline-variant": "#5a4045",
+                      "tertiary": "#5ce069",
+                      "surface-container-highest": "#423033",
+                      "outline": "#a9888e",
+                      "surface-container-low": "#27171a",
+                      "tertiary-fixed": "#79fe82",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#ffd9df",
+                      "surface-bright": "#473438",
+                      "secondary-fixed": "#ffd6fe",
+                      "primary-container": "#ff4c86",
+                      "on-primary-fixed-variant": "#8f003f",
+                      "background": "#1e0f12",
+                      "on-tertiary-fixed": "#002105",
+                      "inverse-surface": "#f8dbe0",
+                      "secondary-container": "#86039c",
+                      "on-surface": "#f8dbe0",
+                      "secondary": "#f9abff",
+                      "on-tertiary-container": "#00320a",
+                      "on-secondary-container": "#f7a0ff",
+                      "surface": "#1e0f12",
+                      "tertiary-fixed-dim": "#5ce069",
+                      "on-surface-variant": "#e2bdc3",
+                      "on-secondary-fixed-variant": "#7b008f",
+                      "on-secondary-fixed": "#35003f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "touch-target-min": "44px",
+                      "gutter": "12px",
+                      "container-padding": "16px"
+              },
+              "fontFamily": {
+                      "label-md": ["Geist"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["Geist"],
+                      "display": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-md": ["Geist"],
+                      "body-lg": ["Geist"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: flex-end;
+            font-family: 'Geist', sans-serif;
+        }
+        
+        .export-gradient {
+            background: linear-gradient(135deg, #FF4081 0%, #9C27B0 100%);
+        }
+
+        .glass-panel {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .active-scale:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+
+        .drag-handle {
+            width: 36px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 12px auto 24px auto;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="dark overflow-hidden">
+<!-- Backdrop Content (Simulated Editor State) -->
+<div class="fixed inset-0 z-0 flex flex-col">
+<!-- Top Nav Mock -->
+<header class="flex justify-between items-center px-container-padding h-touch-target-min fixed top-0 w-full z-10">
+<span class="material-symbols-outlined text-white opacity-40">close</span>
+<span class="font-display text-headline-md text-primary uppercase tracking-tighter">KINETIC NOIR</span>
+<span class="font-label-md text-label-md text-primary opacity-40">EXPORT</span>
+</header>
+<!-- Preview Area -->
+<div class="h-1/2 w-full relative flex items-center justify-center bg-black">
+<img class="w-full h-full object-cover opacity-50 grayscale-[0.5]" data-alt="A cinematic close-up shot of a modern city at night with neon signs reflected in rain-slicked pavement. The lighting is dominated by deep magentas and electric purples, creating a high-contrast noir aesthetic. The mood is moody and high-performance, fitting for a professional video editing software interface. The overall style is sleek and immersive with a focused, artistic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWBmtK6mBml8RD9oQC9kOK5pnY8qUbM2dW7DP4wpe6lzJbxQcEDQ0Pcnta-tt8ijpZBn_NZRQ3se3ixTJYSvlACVRb4VrNNuncx3ibbI3B3hadFQv6q6QtPi9s8Ua0S8BJ-N00aUvANq_Q6994Ccx_NvAFI7m735H3qtds_ZSbZ-zztq8K6_1YIW7os8Pt5WZlB8be19dP-kSgPnmb6REQRSc7ZrX0vCYLnRZdwTarhBkJ7xXGmYafse2RsoYuhYebyIFblxhvutg"/>
+<div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
+<span class="material-symbols-outlined text-white text-6xl opacity-80" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<!-- Timeline Mock -->
+<div class="flex-1 bg-black p-4 flex flex-col justify-end">
+<div class="h-24 w-full bg-[#121212] border border-[#222222] rounded-lg mb-8 flex items-center px-4 relative overflow-hidden">
+<div class="h-16 w-32 bg-[#333333] border-2 border-primary-container/60 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white/40">movie</span>
+</div>
+<div class="h-16 w-48 bg-[#333333] border border-[#222222] rounded ml-2"></div>
+<!-- Playhead -->
+<div class="absolute left-1/3 top-0 bottom-0 w-[2px] bg-primary shadow-[0_0_8px_rgba(255,177,193,0.8)]">
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rotate-45 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Export Settings Bottom Sheet -->
+<div class="relative z-50 w-full glass-panel rounded-t-[32px] border-t border-white/5 shadow-2xl transition-transform duration-300 translate-y-0" id="bottomSheet">
+<!-- Drag Handle -->
+<div class="drag-handle"></div>
+<div class="px-container-padding pb-10">
+<!-- Header -->
+<h1 class="font-headline-md text-headline-md text-white text-center mb-8 uppercase tracking-widest">
+                Export settings
+            </h1>
+<!-- Settings List -->
+<div class="space-y-1 mb-8">
+<!-- Resolution -->
+<button class="w-full flex items-center justify-between py-4 active-scale group">
+<span class="font-body-lg text-body-lg text-white">Resolution</span>
+<div class="flex items-center gap-2">
+<span class="font-body-lg text-body-lg text-on-surface-variant group-hover:text-primary transition-colors">1080p</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+</button>
+<div class="h-[1px] w-full bg-white/5"></div>
+<!-- Frame rate -->
+<button class="w-full flex items-center justify-between py-4 active-scale group">
+<span class="font-body-lg text-body-lg text-white">Frame rate</span>
+<div class="flex items-center gap-2">
+<span class="font-body-lg text-body-lg text-on-surface-variant group-hover:text-primary transition-colors">30fps</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+</button>
+<div class="h-[1px] w-full bg-white/5"></div>
+<!-- Format -->
+<button class="w-full flex items-center justify-between py-4 active-scale group">
+<span class="font-body-lg text-body-lg text-white">Format</span>
+<div class="flex items-center gap-2">
+<span class="font-body-lg text-body-lg text-on-surface-variant group-hover:text-primary transition-colors">MP4</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+</button>
+<div class="h-[1px] w-full bg-white/5"></div>
+<!-- File size -->
+<div class="w-full flex items-center justify-between py-4">
+<span class="font-body-lg text-body-lg text-white">File size (est.)</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant">~45 MB</span>
+</div>
+</div>
+<!-- Action Divider -->
+<div class="h-[1px] w-full bg-white/10 mb-8"></div>
+<!-- Primary Export Button -->
+<button class="w-full h-[56px] export-gradient rounded-xl font-headline-md text-headline-md text-white shadow-lg shadow-primary-container/20 active-scale uppercase tracking-wider mb-4">
+                Export
+            </button>
+<!-- Secondary Action -->
+<button class="w-full py-2 font-label-md text-label-md text-on-surface-variant hover:text-white transition-colors uppercase tracking-widest active-scale">
+                Save as draft
+            </button>
+</div>
+<!-- Safe Area Spacer for iOS/Modern Android -->
+<div class="h-6"></div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple touch interaction for the bottom sheet
+        const sheet = document.getElementById('bottomSheet');
+        let startY = 0;
+        let currentY = 0;
+
+        sheet.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+
+        sheet.addEventListener('touchmove', (e) => {
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchY - startY;
+            if (deltaY > 0) {
+                sheet.style.transform = `translateY(${deltaY}px)`;
+            }
+        });
+
+        sheet.addEventListener('touchend', (e) => {
+            const touchY = e.changedTouches[0].clientY;
+            const deltaY = touchY - startY;
+            
+            if (deltaY > 150) {
+                // Mimic close behavior
+                sheet.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                sheet.style.transform = 'translateY(100%)';
+            } else {
+                // Snap back
+                sheet.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+                sheet.style.transform = 'translateY(0px)';
+            }
+        });
+    </script>
+</body></html>

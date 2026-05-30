@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Color Adjust - CapCut Clone</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Geist:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            border: 2px solid #ffb1c1;
+        }
+        .slider-thumb::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ffb1c1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "on-primary": "#66002a",
+                        "secondary-fixed-dim": "#f9abff",
+                        "on-tertiary-container": "#00320a",
+                        "surface": "#1e0f12",
+                        "outline-variant": "#5a4045",
+                        "secondary-fixed": "#ffd6fe",
+                        "on-secondary": "#570066",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "primary-container": "#ff4c86",
+                        "on-surface": "#f8dbe0",
+                        "surface-variant": "#423033",
+                        "secondary-container": "#86039c",
+                        "surface-bright": "#473438",
+                        "primary-fixed": "#ffd9df",
+                        "background": "#1e0f12",
+                        "tertiary-container": "#0fa739",
+                        "outline": "#a9888e",
+                        "on-primary-container": "#590024",
+                        "on-background": "#f8dbe0",
+                        "on-tertiary": "#00390d",
+                        "tertiary": "#5ce069",
+                        "surface-container-low": "#27171a",
+                        "on-surface-variant": "#e2bdc3",
+                        "inverse-on-surface": "#3d2c2f",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "surface-container-highest": "#423033",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "surface-container-lowest": "#180a0d",
+                        "secondary": "#f9abff",
+                        "tertiary-fixed": "#79fe82",
+                        "surface-tint": "#ffb1c1",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#1e0f12",
+                        "surface-container": "#2b1b1e",
+                        "on-secondary-fixed": "#35003f",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "on-secondary-container": "#f7a0ff",
+                        "inverse-surface": "#f8dbe0",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#ffb1c1",
+                        "on-primary-fixed": "#3f0018",
+                        "surface-container-high": "#362529",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "inverse-primary": "#bb0054",
+                        "on-tertiary-fixed": "#002105"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "16px",
+                        "gutter": "12px",
+                        "touch-target-min": "44px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "display": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface font-body-md overflow-hidden selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-black/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-variant/30 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+</div>
+<h1 class="font-display text-headline-md font-bold text-white tracking-tight">Adjust</h1>
+<div class="flex items-center gap-1">
+<button class="p-2 hover:bg-surface-variant/30 rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface">compare</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/30 rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-primary font-bold">check</span>
+</button>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex flex-col h-screen pt-14">
+<!-- Preview Canvas (Top 40%) -->
+<section class="relative w-full h-[353px] bg-black overflow-hidden group">
+<div class="absolute inset-0 flex">
+<!-- Original Half -->
+<div class="w-1/2 h-full relative grayscale-[0.3] contrast-75 brightness-75 overflow-hidden">
+<img alt="Cinema Background" class="absolute h-full w-[200%] max-w-none left-0 object-cover" data-alt="A cinematic low-light shot of a misty neon-lit futuristic street. The original left half is desaturated and muted with heavy shadows and low contrast, reflecting a raw unedited camera profile. The overall tone is moody, dark, and industrial with deep blacks and soft hazy lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjRaQROsKRJ_2lBts6UNVyU8SFZbyRyMlNuhap96R16I_W8QXo1or60FQxoDmPtGxesO969Za9Em6KKy4onutPBGo6OXEASQWSkh5DxQ1eIIMCyTIsWHw-WupsKlpTiQUy2sqt_o04heic_nD07sqar-G-rhxX-_po-X3h-nr3Rh5X3O9c1AEFe8QkAdhkBxm1yo5G15AoHT1L-C9jipW5Vjca19sh9_ESRIBvdEOvEsMvbNSBRCZvmdp1eyiVqST2dwtVsXrbgQQ"/>
+<div class="absolute bottom-4 left-4">
+<span class="text-on-surface-variant/60 font-label-md text-[10px] uppercase tracking-widest bg-black/40 px-2 py-1 rounded backdrop-blur-sm">Original</span>
+</div>
+</div>
+<!-- Adjusted Half -->
+<div class="w-1/2 h-full relative overflow-hidden">
+<img alt="Cinema Background" class="absolute h-full w-[200%] max-w-none right-0 object-cover" data-alt="A high-contrast cinematic edit of a neon-lit futuristic city street. The adjusted right half features vibrant magenta and cyan highlights, deep ink-black shadows, and razor-sharp clarity. The mood is high-energy kinetic noir with glowing puddles and crisp architectural details, processed with a professional color grade." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjWbJsihs5qC4Saod6PtdlpajzIezK9_DstM-jp34S29G10b_I-ZOhdTWQaHHXbf2Ix8t-FsV1jzYHmMgxSXRVWT9BMu2GanYWJIG2TMs4PgAL3BTSw5p7z_EZnupI4QQg4DK68-Ge4A7OOelPmhCmW3RE_fQ1hStwPOcKtnXSLhwFwI7EigzRsdh_DoHDqw72MgMbUxD3UdvkqKJikwRRGbTv8z3hO54NYSfWkg8fKKQNlteeLodLQX68EEpx0QMbw0utIg47ozk"/>
+<div class="absolute bottom-4 right-4">
+<span class="text-primary font-label-md text-[10px] uppercase tracking-widest bg-black/40 px-2 py-1 rounded backdrop-blur-sm">Adjusted</span>
+</div>
+</div>
+</div>
+<!-- Comparison Slider Handle -->
+<div class="absolute inset-y-0 left-1/2 -translate-x-px w-0.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)] z-10">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg cursor-grab active:cursor-grabbing transition-transform active:scale-110">
+<span class="material-symbols-outlined text-black text-sm">unfold_more_double</span>
+</div>
+</div>
+</section>
+<!-- Adjustment Panel (Bottom 60%) -->
+<section class="flex-1 bg-[#0a0a0a] rounded-t-[32px] mt-[-24px] z-20 flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.8)] border-t border-white/5">
+<!-- Tool Tabs Horizontal Scroll -->
+<div class="w-full overflow-x-auto py-6 px-4 no-scrollbar border-b border-white/5">
+<div class="flex gap-6 min-w-max items-center">
+<!-- Brightness (Active) -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-variant/20 rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white fill-icon">brightness_6</span>
+</div>
+<div class="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_#ffb1c1]"></div>
+</button>
+<!-- Contrast -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">contrast</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+<!-- Saturation -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">opacity</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+<!-- Sharpness -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">details</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+<!-- Highlights -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">light_mode</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+<!-- Shadows -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">exposure</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+<!-- Temp -->
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 flex items-center justify-center bg-transparent rounded-xl group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">thermostat</span>
+</div>
+<div class="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+</button>
+</div>
+</div>
+<!-- Active Control Area -->
+<div class="flex-1 flex flex-col items-center justify-center px-8">
+<div class="text-center mb-10">
+<h3 class="font-display text-headline-md font-bold text-white uppercase tracking-tighter">Brightness</h3>
+<p class="text-primary font-display text-display leading-none">+23</p>
+</div>
+<div class="w-full relative py-4">
+<div class="flex justify-between w-full mb-4 px-1">
+<span class="font-label-sm text-on-surface-variant/50">-100</span>
+<span class="font-label-sm text-on-surface-variant/50">+100</span>
+</div>
+<!-- Custom Styled Slider Track -->
+<div class="absolute top-[52px] left-0 w-full h-1 bg-surface-variant/30 rounded-full"></div>
+<div class="absolute top-[52px] left-1/2 w-[23%] h-1 bg-primary rounded-full shadow-[0_0_10px_rgba(255,177,193,0.4)]"></div>
+<input class="slider-thumb relative w-full h-1 bg-transparent appearance-none outline-none z-10" max="100" min="-100" type="range" value="23"/>
+</div>
+</div>
+<!-- Footer Controls -->
+<div class="pb-safe pt-4">
+<div class="flex justify-between items-center px-6 mb-4">
+<button class="text-on-surface-variant font-label-md hover:text-white transition-colors">Reset</button>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded bg-surface-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">undo</span>
+</button>
+<button class="w-8 h-8 rounded bg-surface-variant/20 flex items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-sm">redo</span>
+</button>
+</div>
+</div>
+<!-- History Thumbnails -->
+<div class="flex gap-1.5 px-1 py-1 bg-black overflow-x-auto no-scrollbar">
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm border border-primary overflow-hidden">
+<img alt="Current State" class="w-full h-full object-cover brightness-110 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUYFhxzMo4Jp9cTIH0GimWnaOLe4cQXTeOASsGRo1uDEsFZaA8UmxgAJqIbEVCouAcJLnOvlOBPvvkUJNrifZWYJF6khscIUY93yqJQqHXumHLGMtg69s5tBySs-1Oypo2f-NGPWjgtSQ2TNiEhPZdmW7BIneV-jZhFNqrmfvT60RSwUGRGGOfaeHzbTCrIo0qjlQpxsAXZaQnKACPKoGyJwsbwKY_vQ5nE7DhPryQcd-T7KeSlKVv9iGYK-POKhAMIPW434ax2-c"/>
+<div class="absolute inset-0 bg-primary/10"></div>
+</div>
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm overflow-hidden opacity-40">
+<img alt="Previous State" class="w-full h-full object-cover brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ql7YAJV927PbFEoV_xDQdSLZGylWD2VpJyKvHIxeFYXINxr8XfPrLjAmUyCEPxexvstejhLIst8mE7E7Bk7ziNUDHxI3GY0yEYvFQ_Jqlwp5YmRLk2mcmrABtgJmIG__-VImzSATPCAllDb2r4gq8vSxQ6G-TiRxher1tCo6Dmo3PvpqPdv5KfgwYKLV1jMDuob-HdXzf5R_bZ1Vaqohxc5ZOu3av4FqODLCl9s9cUGXdyfmjoYIpe7_837aRz9c_Skd0W7LLp4"/>
+</div>
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm overflow-hidden opacity-40">
+<img alt="History 1" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg2bx6bJamjs24M_NwR8JyiBbDm3fOzeMUkJcck_oL8AD27oOoogD0RtYBYApVEW5icO85OVZ3Zz5XvbenLXJ8GQe_YYU7oDxskvuXRyCkRXV3njbxGgHfvSIFGvVTfv9BfzaWhRUoVQM2VNiXfpZ15oUt-sUy_9JblLqCLe0SzG2IB9SYnni5YBV3WT9UDNpgo9DXV4KgAgig_inE2MKcCt7RfjZJnZoLZKp37UAQKOa0rSLt9KrMS9TneSX3r3pqG5ixcGlZx5A"/>
+</div>
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm overflow-hidden opacity-40">
+<img alt="History 2" class="w-full h-full object-cover contrast-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWDt7Qt__fg3pspfyOIuda0O6ZcgCKJ2RuXhLi-_oRyn926pceyWTqj4nUJfBQrMMEHdsJgQ0mxgEBHU3pqZEF7dwmViPJOOjiqTUqsIdMj4PGFNILXLluj4oFLepOZVnHGvvmitRCCp2xLPsKkughqRuxV8CzO-yNl8v89ozDxdPsKF1fovMKYeuKXoxfYq3AmTveh7l58smkG1TnBURHXTNXOcnZXU61lwtO1NvBnJHh7td7xWcJj7PMHKuiWcm1qcLabxNKedk"/>
+</div>
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm overflow-hidden opacity-40">
+<img alt="History 3" class="w-full h-full object-cover blur-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzcOK3MtROs_mdBt2VPdV4W70FhjqDhemr4ywxy4o4ivyZcCn3vySTvSmYqqwAh9X0r7gdk-iiborwKLuKkrkFYQikE7avWxK1Ug2J92RHdPDTSlyPqSheZbOqe8D307r-kBC6A-32tpPRqiDxJ4opGY8DKiVMmzzkZ39N8Vdx-BaswOj8dhMSIRAmaBdk10McXM4tvbBi9GsZ0FMHE4tHa31vob0Kc46vE-RUYrQkHRUvtBJFygWaAcR8vbnrD01OfVUk4sxKNmU"/>
+</div>
+<div class="w-16 h-10 flex-shrink-0 relative rounded-sm overflow-hidden opacity-40">
+<img alt="History 4" class="w-full h-full object-cover sepia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRutNu5rmcA0to4qng2j9Eoz10eiwPZIewC9v1ojQVCJHjiH18h_1gkyL977PAULJkdHWmqt8R9ik9VlQjYLtCpm9sr7f3mXgLRIVw4eRp8UNEPZ5jmKVeUd0ftB6da43x_7bl446Fa42HYB4d6ZJ0Na3gdb8csT9hSTQa-BLM277J6k4sBGJldzemU2gAlG_-5iYI8MB4H-KodAbyFAM5hiydMpsVhbP6kfTDxOyyFjmSTAk79y_7iGdL2jFyIx0iY4R3IgISKg"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Interactions Script -->
+<script>
+        // Simple logic for the comparison handle interaction
+        const handle = document.querySelector('.cursor-grab');
+        const container = handle.parentElement.parentElement;
+        const dividerLine = handle.parentElement;
+        const originalPanel = container.children[0].children[0];
+
+        let isDragging = false;
+
+        handle.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            
+            const percent = (x / rect.width) * 100;
+            dividerLine.style.left = `${percent}%`;
+            originalPanel.style.width = `${percent}%`;
+        });
+
+        // Touch support
+        handle.addEventListener('touchstart', () => isDragging = true);
+        window.addEventListener('touchend', () => isDragging = false);
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const rect = container.getBoundingClientRect();
+            let x = e.touches[0].clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            
+            const percent = (x / rect.width) * 100;
+            dividerLine.style.left = `${percent}%`;
+            originalPanel.style.width = `${percent}%`;
+        });
+    </script>
+</body></html>

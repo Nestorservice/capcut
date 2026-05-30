@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Noir - Audio Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Geist:wght@400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#f9abff",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "secondary-fixed-dim": "#f9abff",
+                        "surface-container-lowest": "#180a0d",
+                        "surface-bright": "#473438",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "surface-variant": "#423033",
+                        "surface-container": "#2b1b1e",
+                        "on-primary-container": "#590024",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-background": "#f8dbe0",
+                        "on-secondary-container": "#f7a0ff",
+                        "error-container": "#93000a",
+                        "secondary-container": "#86039c",
+                        "surface-container-high": "#362529",
+                        "on-surface-variant": "#e2bdc3",
+                        "on-secondary": "#570066",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#27171a",
+                        "on-tertiary": "#00390d",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "surface": "#000000",
+                        "background": "#000000",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#423033",
+                        "on-primary": "#66002a",
+                        "outline": "#a9888e",
+                        "inverse-on-surface": "#3d2c2f",
+                        "primary": "#ff4081",
+                        "tertiary-fixed": "#79fe82",
+                        "on-surface": "#f8dbe0",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "secondary-fixed": "#ffd6fe",
+                        "primary-fixed": "#ffd9df",
+                        "outline-variant": "#5a4045",
+                        "tertiary-container": "#0fa739",
+                        "on-secondary-fixed": "#35003f",
+                        "inverse-surface": "#f8dbe0",
+                        "tertiary": "#5ce069",
+                        "inverse-primary": "#bb0054",
+                        "on-tertiary-fixed": "#002105",
+                        "surface-tint": "#ffb1c1",
+                        "on-tertiary-container": "#00320a",
+                        "surface-dim": "#1e0f12",
+                        "primary-container": "#ff4c86",
+                        "on-primary-fixed": "#3f0018"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "44px",
+                        "unit": "4px",
+                        "gutter": "12px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "body-md": ["Geist"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["20px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab { border-bottom: 2px solid #ff4081; }
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        ::-webkit-scrollbar { display: none; }
+        .waveform-bar {
+            animation: wave 1.2s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 4px; }
+            50% { height: 16px; }
+        }
+        .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 min-h-screen flex flex-col overflow-hidden">
+<!-- TOP BAR -->
+<header class="flex justify-between items-center w-full px-container-padding h-touch-target-min bg-background/80 backdrop-blur-xl z-50">
+<button class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile tracking-tighter text-on-surface font-bold">Audio</h1>
+<button class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</header>
+<!-- TAB ROW -->
+<nav class="flex w-full border-b border-outline-variant/20">
+<div class="flex-1 flex flex-col items-center justify-center py-3 active-tab">
+<span class="font-label-md text-label-md text-on-surface">Music</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-3">
+<span class="font-label-md text-label-md text-on-surface-variant/60">Sounds</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-3">
+<span class="font-label-md text-label-md text-on-surface-variant/60">Extracted</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-3">
+<span class="font-label-md text-label-md text-on-surface-variant/60">Voiceover</span>
+</div>
+</nav>
+<!-- SCROLLABLE CONTENT -->
+<main class="flex-1 overflow-y-auto pb-32">
+<!-- Search Bar -->
+<div class="px-container-padding py-4">
+<div class="bg-[#1a1a1a] rounded-xl flex items-center px-4 h-11 border border-outline-variant/10">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface flex-1 px-3 placeholder:text-on-surface-variant/40" placeholder="Search music..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">mic</span>
+</div>
+</div>
+<!-- Recommended for you -->
+<section class="mb-8">
+<div class="px-container-padding flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md">Recommended for you</h2>
+<span class="text-primary font-label-md text-label-md">View all</span>
+</div>
+<div class="flex overflow-x-auto gap-4 px-container-padding snap-x">
+<!-- Active Card -->
+<div class="flex-shrink-0 w-[120px] snap-start group relative">
+<div class="w-[120px] h-[140px] rounded-xl overflow-hidden relative mb-2 ring-2 ring-primary">
+<img alt="Album Art" class="w-full h-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5-nV35pc1-87KDWLVxzVgYOkypoNHodvup7elFNzuOvtx-JH7P6dY9pS7GwAu0NI0hZr9v-D-UyAlXgQW6hgu8kkYtebjwXKl3SwCSWYS6NgBTvhy1OFGfS795n215Y_I5lnpfufDd3C0qJntAeeeoh82CjUPitN2MUM49r4-5XtFdMBbcxj5P4rRqrJXJcLOzFz0S3mynkKZkbffVdIjdZN1iHLNd8n5Y6JuZsqAJsxABsWo8abff5H_NkMKA5_Ol4d0AjNFKGU"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<div class="flex items-end gap-[2px] h-4">
+<div class="w-1 bg-primary waveform-bar"></div>
+<div class="w-1 bg-primary waveform-bar"></div>
+<div class="w-1 bg-primary waveform-bar"></div>
+<div class="w-1 bg-primary waveform-bar"></div>
+</div>
+</div>
+</div>
+<p class="font-label-md text-label-md truncate text-primary">Cyber Lullaby</p>
+<p class="text-[10px] text-on-surface-variant truncate">Neon Dreams</p>
+<span class="text-[9px] font-mono text-on-surface-variant/60 mt-1 block">02:45</span>
+</div>
+<div class="flex-shrink-0 w-[120px] snap-start group">
+<div class="w-[120px] h-[140px] rounded-xl overflow-hidden relative mb-2">
+<img alt="Album Art" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1s74uPjMdrnZeFV6C7rqPG_I5wwOFa26Vq1g-WJSvJ7riz97PN4mjh1kdyTAPKBaE5tG9-lGRwd8Di5dD1E11XSenTdKus4ComHKOe5R3kULfq1gc20olLAhixS5fyt0FGx8tJI6C26wRtkVu9r8E8gDE92TfwByyvlDmh7ppQ7gC5e_absIfE9BkslX90LxhXUatm9sMqZrkTKmv7w6NXuhXxIJwJZNRrlL7fdDH8LEQGoGXn9zU3LQPQ9yKPCfqEdwTQlofqak"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+<span class="material-symbols-outlined text-white text-[40px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+</div>
+<p class="font-label-md text-label-md truncate">Quantum Pulse</p>
+<p class="text-[10px] text-on-surface-variant truncate">Aurora Borelais</p>
+<span class="text-[9px] font-mono text-on-surface-variant/60 mt-1 block">03:12</span>
+</div>
+<div class="flex-shrink-0 w-[120px] snap-start group">
+<div class="w-[120px] h-[140px] rounded-xl overflow-hidden relative mb-2">
+<img alt="Album Art" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCvFb7qNe_XiAhECDlHUu8ffyOn2IrzXZTL6jH1F6_FAV97L33qPKaVY3_Ze4equxjiXFn59oP5nFgAjiCB4phN97MQtR-Ppo2szA3OY00vl1bNC7bsgJlYH9W0IUlGmGrsmIU0ULSoWMYKBgUkmKmI7j6qqRiY2KTlnfPcvVUtUYFVcYi09I_3ub_dbCAxsH8XuZsE7Z9oLIdc1ip5Oma-Bf7W3sKXWJd39jDy96w1hXU1PFShMjKa48bUzdr7CkTSoSyYgQ2Om8"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+<span class="material-symbols-outlined text-white text-[40px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+</div>
+<p class="font-label-md text-label-md truncate">Cyber Echoes</p>
+<p class="text-[10px] text-on-surface-variant truncate">Aurora Null</p>
+<span class="text-[9px] font-mono text-on-surface-variant/60 mt-1 block">01:58</span>
+</div>
+</div>
+</section>
+<!-- Trending -->
+<section class="px-container-padding">
+<h2 class="font-headline-md text-headline-md mb-4">Trending</h2>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">music_note</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Midnight City Glitch</p>
+<p class="text-[10px] text-on-surface-variant">Synthwave Collective</p>
+</div>
+<div class="text-right flex items-center gap-3">
+<span class="text-[10px] font-mono text-on-surface-variant/60">02:15</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer active:text-primary">download</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">music_note</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Digital Drift</p>
+<p class="text-[10px] text-on-surface-variant">Tokyo Night</p>
+</div>
+<div class="text-right flex items-center gap-3">
+<span class="text-[10px] font-mono text-on-surface-variant/60">03:40</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">music_note</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md">Kinetic Void</p>
+<p class="text-[10px] text-on-surface-variant">Dark Matter</p>
+</div>
+<div class="text-right flex items-center gap-3">
+<span class="text-[10px] font-mono text-on-surface-variant/60">04:12</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer">download</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BOTTOM AUDIO STRIP -->
+<div class="fixed bottom-0 left-0 w-full z-[100] transition-transform duration-300 transform translate-y-0">
+<div class="bg-[#1a1a1a] border-t border-outline-variant/10 px-container-padding py-3 pb-8">
+<!-- Waveform visualizer -->
+<div class="w-full h-8 flex items-center gap-[2px] mb-3 overflow-hidden">
+<div class="flex-1 h-[1px] bg-emerald-500 opacity-30"></div>
+<div class="flex gap-[1px] items-center">
+<div class="w-[2px] h-2 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-4 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-6 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-5 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-3 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-6 bg-emerald-500 rounded-full"></div>
+<div class="w-[2px] h-4 bg-emerald-500 rounded-full"></div>
+</div>
+<div class="flex-1 h-[1px] bg-emerald-500 opacity-30"></div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">volume_up</span>
+<div class="flex-1 h-1 bg-surface-container rounded-full relative overflow-hidden group">
+<div class="absolute inset-y-0 left-0 w-[85%] bg-primary"></div>
+<div class="absolute left-[85%] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg"></div>
+</div>
+<span class="text-[11px] font-mono text-on-surface min-w-[32px]">100%</span>
+<div class="w-[1px] h-6 bg-outline-variant/30"></div>
+<button class="active:scale-90 transition-all p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20">
+<span class="material-symbols-outlined text-red-500">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Micro-interaction JS -->
+<script>
+        document.querySelectorAll('button, .snap-start').forEach(el => {
+            el.addEventListener('touchstart', () => {
+                el.classList.add('scale-95');
+            });
+            el.addEventListener('touchend', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+
+        // Simple waveform animation for the emerald bar
+        const bars = document.querySelectorAll('.rounded-full');
+        setInterval(() => {
+            bars.forEach(bar => {
+                const height = Math.floor(Math.random() * 20) + 4;
+                bar.style.height = `${height}px`;
+            });
+        }, 150);
+    </script>
+</body></html>

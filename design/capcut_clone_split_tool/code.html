@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,600;0,700;0,800;1,800&amp;family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .video-canvas {
+            aspect-ratio: 9/16;
+            background-color: #000000;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+        .timeline-scroll::-webkit-scrollbar { display: none; }
+        .timeline-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #FF4081 0%, #9C27B0 100%);
+        }
+        
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .split-handle {
+            box-shadow: 0 0 10px rgba(255, 64, 129, 0.4);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#5ce069",
+                      "primary-fixed-dim": "#ffb1c1",
+                      "surface-container-highest": "#423033",
+                      "secondary-fixed": "#ffd6fe",
+                      "on-primary-fixed-variant": "#8f003f",
+                      "on-secondary-fixed": "#35003f",
+                      "on-secondary-container": "#f7a0ff",
+                      "on-primary": "#66002a",
+                      "on-primary-fixed": "#3f0018",
+                      "on-error": "#690005",
+                      "primary-fixed": "#ffd9df",
+                      "on-surface-variant": "#e2bdc3",
+                      "on-surface": "#f8dbe0",
+                      "error": "#ffb4ab",
+                      "primary-container": "#ff4c86",
+                      "outline-variant": "#5a4045",
+                      "on-secondary": "#570066",
+                      "primary": "#ffb1c1",
+                      "on-tertiary-fixed": "#002105",
+                      "surface": "#1e0f12",
+                      "surface-container-lowest": "#180a0d",
+                      "secondary-fixed-dim": "#f9abff",
+                      "on-tertiary-fixed-variant": "#005317",
+                      "inverse-on-surface": "#3d2c2f",
+                      "surface-container-low": "#27171a",
+                      "surface-tint": "#ffb1c1",
+                      "on-tertiary": "#00390d",
+                      "error-container": "#93000a",
+                      "background": "#1e0f12",
+                      "outline": "#a9888e",
+                      "tertiary-fixed-dim": "#5ce069",
+                      "surface-dim": "#1e0f12",
+                      "secondary-container": "#86039c",
+                      "tertiary-fixed": "#79fe82",
+                      "surface-container": "#2b1b1e",
+                      "on-background": "#f8dbe0",
+                      "inverse-primary": "#bb0054",
+                      "inverse-surface": "#f8dbe0",
+                      "tertiary-container": "#0fa739",
+                      "surface-variant": "#423033",
+                      "on-tertiary-container": "#00320a",
+                      "on-error-container": "#ffdad6",
+                      "surface-bright": "#473438",
+                      "secondary": "#f9abff",
+                      "surface-container-high": "#362529",
+                      "on-secondary-fixed-variant": "#7b008f",
+                      "on-primary-container": "#590024"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "touch-target-min": "44px",
+                      "container-padding": "16px",
+                      "unit": "4px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-md": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "label-md": ["Geist"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-sm": ["Geist"],
+                      "display": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen">
+<!-- Top App Bar (From Shared Components Protocol) -->
+<header class="flex justify-between items-center px-container-padding h-14 w-full bg-surface dark:bg-surface fixed top-0 z-50">
+<button class="active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Split</h1>
+<button class="active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">check</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col pt-14 pb-safe">
+<!-- PREVIEW ZONE (55%) -->
+<section class="h-[486px] flex flex-col items-center justify-center relative bg-black px-container-padding">
+<div class="video-canvas w-auto h-full max-h-[85%] rounded-lg overflow-hidden relative border border-outline-variant">
+<img alt="Video Preview" class="w-full h-full object-cover opacity-80" data-alt="A cinematic vertical 9:16 video frame preview showing a vibrant cityscape at night with neon lights reflecting on wet pavement. The lighting is moody and dramatic with deep blacks and pops of magenta and cyan. The aesthetic is professional, high-definition, and sleek, fitting for a premium mobile video editor interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATX-H5buhQFDOyzW1MUaC6JkWXKbr48OQV1AJ8_8aWWSZuPtSsusZQiTMBjdpL74YDO-2UJXY_U8a3PENJOpdKLpisf4EPtSsqX9nwRfv9qU0wPwJkbrsNB4wveQtJ7jKLl9y_UP1ptPma4RzDotarcmnirdsiHjZmz4yOGDaB3XHmQdZn02qcJAvvgd9d1ixPT43lcNGIJwp9hT5hTRFt_gfsczxYWZxT9rwa-ZDfYIXwCzfxPDeDY420gAoGlGnUluqtlY4sq8c"/>
+<!-- Vertical Split Indicator -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="h-full w-[2px] bg-white relative">
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white flex items-center justify-center split-handle">
+<span class="material-symbols-outlined text-black text-sm">swap_horiz</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timestamp -->
+<div class="mt-4 font-mono text-on-surface tracking-widest text-lg font-bold">
+                00:07
+            </div>
+</section>
+<!-- TIMELINE ZONE -->
+<section class="flex-1 glass-panel flex flex-col justify-center border-t border-outline-variant/30">
+<div class="relative h-24 w-full overflow-hidden">
+<!-- Timeline Scroll Area -->
+<div class="timeline-scroll flex items-center px-[50%] h-full overflow-x-auto space-x-2">
+<!-- Clip 1 -->
+<div class="flex-shrink-0 w-32 h-16 rounded-md bg-surface-container-highest border border-outline-variant relative opacity-60">
+<img alt="Thumb 1" class="w-full h-full object-cover rounded-md" data-alt="Small thumbnail of a high-end camera lens capturing light flares in a dark studio. The color palette is dark gray and black with subtle highlights. The image is part of a video editing timeline clip representing professional cinematography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxun7kJ3bUB8kB6rB1f1Ng7c4c8VSi9w4yPSexAmy8LgRidp6XgFBpZwrpR98jJ-E9lkRkjjwrL8l4RoFfy5jLKT3jSgWCcJ2L_H6xgH4edsKVvZWoiyVWbCJlMVxK03FBXKqhXLkJwFVXCAOPEf3vxSQ2L5pwZhy_cDn5hYiOYiloayF0s3w6BY-CVFp1DblmbgOHgvvuPABJyx43FojtxtXvZRL6Bc4T_1vSToQ5XPfnOHWcIssfPpiGtMlC_lY-4ziSCIikN44"/>
+</div>
+<!-- Active Clip (With White Border) -->
+<div class="flex-shrink-0 w-64 h-16 rounded-md bg-surface-container border-2 border-white relative">
+<img alt="Active Clip" class="w-full h-full object-cover rounded-md" data-alt="A vibrant video clip thumbnail on an editing timeline showing a close-up of colorful smoke swirling in a dark environment. The colors are punchy pinks and purples against a deep black background. The clip is highlighted with a crisp white border indicating it is currently selected for editing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwa82ao7fCv0QIObm-xfwV6ZfsrayYS1ZjZxWWTgZ-fdQYxv5M0Jq1SC0HMJprTp9u1J7CuzAYTBeViwmRAhmsikZGyteAWWJLdflCPbnnMpQSwskXCHgXHq_f8ng_jY7Mbtz3PDYS8sTGs_JHLVV7QENzZfnTuEfXFEucr61Ng65trOHysBegeLml8DpZoqA44FHR56BqCgtti844LfitsBGbSAY7qQZmF1KfDjzqtynBA-kA-DmjHBJy4_nSXDHEycESOqwfy-w"/>
+<div class="absolute inset-y-0 left-1/3 w-px bg-white/30"></div>
+<div class="absolute inset-y-0 right-1/4 w-px bg-white/30"></div>
+</div>
+<!-- Clip 3 -->
+<div class="flex-shrink-0 w-40 h-16 rounded-md bg-surface-container-highest border border-outline-variant relative opacity-60">
+<img alt="Thumb 3" class="w-full h-full object-cover rounded-md" data-alt="Abstract dark background with geometric patterns and soft light leaks in dark red tones. A video thumbnail representing professional b-roll footage in a high-fidelity mobile editor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoG5yR-rbXbYFj8sb6UTIbRiyNntkxVpP15jVMzU9KTgUmkaQeh-tIQ7ZhGtuTWE2z0B50Vwj6EyA8tHmOGpquXxHPde_cSXORZ14Xpeb4t7l7lgCPphxPse3pb5pUgFfBpFKViMqhpgC8N3hlexKw7cvU0SDitqnX7U4OjvaChEloV8IKBBEAGAoVOAV12S5Z6ax2ySLJC5f4o-T2hCQ6kX3253fBrQnCy4r5PLrxIxbrwZ9C7CdmYRIib7zpO_lMJiIZRnoDAEw"/>
+</div>
+</div>
+<!-- Playhead / Cursor (Fixed Center) -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<div class="mb-1 bg-white p-1 rounded-sm shadow-lg">
+<span class="material-symbols-outlined text-[16px] text-black leading-none">content_cut</span>
+</div>
+<div class="h-20 w-0.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"></div>
+</div>
+</div>
+</section>
+<!-- BOTTOM CONTROLS -->
+<section class="p-container-padding space-y-4 pb-8">
+<button class="w-full h-14 gradient-primary rounded-xl flex items-center justify-center space-x-3 active:scale-[0.98] transition-all duration-200 shadow-lg">
+<span class="material-symbols-outlined text-white">content_cut</span>
+<span class="text-white font-headline-md text-headline-md tracking-tight">Split here</span>
+</button>
+<button class="w-full py-2 text-on-surface-variant font-label-md text-label-md uppercase tracking-widest hover:text-white transition-colors active:opacity-50">
+                Split into equal parts
+            </button>
+</section>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple haptic-like feedback on interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+
+        // Sync timeline scroll with a subtle parallax or snap effect if needed
+        const timeline = document.querySelector('.timeline-scroll');
+        timeline.addEventListener('scroll', () => {
+            // Placeholder for syncing frame preview if this were a real app
+        });
+    </script>
+</body></html>

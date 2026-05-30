@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>CapCut Clone - Filter &amp; Color Grading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar suppression */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Glassmorphism focus */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        /* Range Input Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #ff4c86;
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#423033",
+                        "on-background": "#f8dbe0",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "outline": "#a9888e",
+                        "on-primary-fixed": "#3f0018",
+                        "surface-variant": "#423033",
+                        "secondary-fixed": "#ffd6fe",
+                        "on-surface-variant": "#e2bdc3",
+                        "secondary": "#f9abff",
+                        "on-surface": "#f8dbe0",
+                        "surface": "#1e0f12",
+                        "primary-container": "#ff4c86",
+                        "outline-variant": "#5a4045",
+                        "on-tertiary": "#00390d",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "background": "#1e0f12",
+                        "surface-container-high": "#362529",
+                        "on-primary-container": "#590024",
+                        "on-primary": "#66002a",
+                        "on-secondary-container": "#f7a0ff",
+                        "surface-container": "#2b1b1e",
+                        "error-container": "#93000a",
+                        "primary": "#ffb1c1",
+                        "inverse-surface": "#f8dbe0",
+                        "surface-bright": "#473438",
+                        "on-tertiary-fixed": "#002105",
+                        "primary-fixed": "#ffd9df",
+                        "on-tertiary-container": "#00320a",
+                        "surface-tint": "#ffb1c1",
+                        "tertiary": "#5ce069",
+                        "inverse-primary": "#bb0054",
+                        "tertiary-container": "#0fa739",
+                        "on-secondary-fixed": "#35003f",
+                        "surface-container-lowest": "#180a0d",
+                        "surface-container-low": "#27171a",
+                        "surface-dim": "#1e0f12",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "tertiary-fixed": "#79fe82",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "secondary-fixed-dim": "#f9abff",
+                        "secondary-container": "#86039c",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#3d2c2f",
+                        "on-secondary": "#570066"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "container-padding": "16px",
+                        "touch-target-min": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "label-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-screen flex flex-col font-body-md">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-padding h-touch-target-min bg-surface-container-lowest border-b border-outline-variant">
+<button class="flex items-center justify-center w-10 h-10 hover:bg-surface-variant transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface">Filter</h1>
+<button class="flex items-center justify-center w-10 h-10 hover:bg-surface-variant transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary-container">check</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col pt-touch-target-min">
+<!-- Preview Zone (40%) -->
+<section class="relative h-[353px] w-full bg-black overflow-hidden">
+<img alt="Cinematic City Scene" class="w-full h-full object-cover filter brightness-90 contrast-110 saturate-125" data-alt="A sweeping cinematic view of a futuristic Tokyo-style cityscape at night. The skyscrapers are drenched in deep blue and neon pink hues, reflecting off wet asphalt streets below. Cinematic lighting creates long shadows and soft atmospheric haze. The overall visual style is sleek, high-contrast kinetic noir with a rich, professional color grade." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlMsEvoS2XE_NVIZHQczE07yK3N8h-RFkcfAn3KHt589s9dwTpoJUp_iO-07Qgaa1QNovVU2za0IC9zZGRqaU2LolaHxhYjZLorhp0pCPc5KLHI1iwQurrHd_Esil9KnZJqFec5KbwqY8-LpUuxjJxKW3aZq9Y3xluXGlQKCbT58j025UT_EH_Na0NdJDdTJT_LE6oP-q551xfGEon2abDcf2vMWiGoahUH5rZjayZSaGq4YXD-9V970-4b-1XVW7kOhIOSERtuXw"/>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2">
+<div class="glass-panel px-4 py-1.5 rounded-full border border-white/20">
+<span class="text-white font-label-md text-label-md">Cinematic 01</span>
+</div>
+</div>
+</section>
+<!-- Tool Panel (60%) -->
+<section class="flex-1 bg-[#0d0d0d] rounded-t-[24px] overflow-hidden flex flex-col shadow-2xl">
+<!-- Tab Row -->
+<div class="flex px-container-padding pt-4">
+<button class="px-4 py-2 text-on-surface font-bold relative transition-all" id="tab-filter" onclick="switchTab('filter')">
+                    Filter
+                    <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-primary-container" id="indicator-filter"></div>
+</button>
+<button class="px-4 py-2 text-on-surface-variant font-medium relative transition-all" id="tab-adjust" onclick="switchTab('adjust')">
+                    Adjust
+                    <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-primary-container opacity-0" id="indicator-adjust"></div>
+</button>
+<button class="px-4 py-2 text-on-surface-variant font-medium relative transition-all" id="tab-vignette" onclick="switchTab('vignette')">
+                    Vignette
+                    <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-primary-container opacity-0" id="indicator-vignette"></div>
+</button>
+</div>
+<!-- Filter View -->
+<div class="flex-1 flex flex-col pt-4 space-y-6" id="view-filter">
+<!-- Category Pills -->
+<div class="flex overflow-x-auto no-scrollbar px-container-padding space-x-2">
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-on-background text-[#1e0f12] text-label-md font-label-md">All</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Portrait</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Landscape</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Cinematic</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Food</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Vintage</button>
+<button class="flex-shrink-0 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-md font-label-md">Neon</button>
+</div>
+<!-- Filter Grid -->
+<div class="flex overflow-x-auto no-scrollbar px-container-padding space-x-3">
+<!-- Item None -->
+<div class="flex-shrink-0 flex flex-col items-center space-y-2">
+<div class="w-[90px] h-[90px] rounded-lg bg-surface-container border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">block</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">None</span>
+</div>
+<!-- Item Selected (Cinematic 01) -->
+<div class="flex-shrink-0 flex flex-col items-center space-y-2">
+<div class="relative w-[90px] h-[90px] rounded-lg border-2 border-white overflow-hidden shadow-lg shadow-primary-container/20">
+<img alt="Cinematic Thumbnail" class="w-full h-full object-cover saturate-150 contrast-125" data-alt="A vertical video thumbnail of a busy city intersection at night, edited with a vibrant cinematic blue and pink filter. High contrast and deep blacks emphasize the city lights. Professional color grading aesthetic for a mobile video editor interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCk5l08S8cjD14ZGTtgRH3vcsWlMhSaTo_OcL9yLIsrKEFfap8SE--Q7QkKjthnquE0pRYu3ayKAjtYgh1s7Jbth8sjRecngM9YcurQxlmhsCtIs2sWn23oxx0lLgsD1hzyCjvNCuAVbKoQDpIhcZL99ZWv2erxnHR_DGqHJO26MPtbJ1Q1ov0lUork2LzP8J87dwW_O_h7O3uaHlYO2F44F8NUtJRzD-guAsed9NaZ4lIyTdCh4HFBDCdw_4N2uOu65k8G4bL89o"/>
+<div class="absolute top-1 right-1 w-5 h-5 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[14px]">check</span>
+</div>
+</div>
+<span class="text-label-sm font-label-sm text-white">Cinema</span>
+</div>
+<!-- Other Filters -->
+<div class="flex-shrink-0 flex flex-col items-center space-y-2">
+<div class="w-[90px] h-[90px] rounded-lg bg-surface-container overflow-hidden">
+<img alt="Noir Thumbnail" class="w-full h-full object-cover grayscale" data-alt="A vertical video thumbnail of a dark alleyway at night, processed with a moody black and white filter. Strong shadows and sharp highlights create a classic noir film aesthetic. High contrast and professional grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN_q7185wlf3oUtZUMG3-j8YthdosQuDiPnW1ledCTfF1RVRsVmIZGk7GHPrd0YmW4wim6j8Ftd0h-ZIpcj4IxAgxpvhQ-LRYhAWSIbwEcfnvE7F2k92jIneUib6ln71nYa_R3BN0EIlLJYVmv865fVlyk2ghE23CbKfn4MGR5cJ1rXG_n1KDCsPmmorDFgISDlfgFuYZgJmp8VWpNcEhEDOFxdm5r7CTW54sgLGU0elOLP1naWCe-1u8v3n382q09obdtHxXQLAE"/>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Noir</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center space-y-2">
+<div class="w-[90px] h-[90px] rounded-lg bg-surface-container overflow-hidden">
+<img alt="Cold Thumbnail" class="w-full h-full object-cover hue-rotate-180" data-alt="A vertical video thumbnail of city lights at night, filtered with icy blue and teal tones. The lighting is cold and crisp, giving a modern technological feel to the urban landscape. Clean professional color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf2R3s2boeDxZiXYKMvso3OnbQw_MQL69Tddeye1l3TqWpRZCU7owYP_vVEVsavMJZxdHR7vBX6HxR87JWDiTC2nEZzUabEEWEGySIo5KK4XM9iqECRUdOT1fZ0PEm9IVDJMJKIFCVm7YKEG5uwRcb-gUO2xFgDmZpdS7-GxFq2qZIc_oPgl8Mskgz-NUDin22nLeuxEh2z7AtZvFxV3OL6rBUevEJjXg0nUGfsa0fVQqL9NMFh_WCAZ1q03_thxb4FTxnck_-gHg"/>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Cold</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center space-y-2">
+<div class="w-[90px] h-[90px] rounded-lg bg-surface-container overflow-hidden">
+<img alt="Warm Thumbnail" class="w-full h-full object-cover sepia-[0.8]" data-alt="A vertical video thumbnail of sunset city streets, graded with warm amber and gold tones. The atmosphere is nostalgic and cozy, emphasizing golden hour highlights across building facades. Professional cinematic grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaNMI8BEkI32Wc0gk53_khrH8PddTF_XUrQULyWdpPNbQSiD08nmhl9LVQvFNItVxEH-6iGMzIt3WZ5ZMUVqqfVuB8tj8py-OyL5n4fy_7HJ5EEvdcuGg7EmBvYU2iED5ghMrROH2uqnxj2FD3Arf3lbjwmMKgCp1EIXKKGmvDGYRbL_QBISIf7ddV1eoJXL_4r_1o46jUI--bFsKsr6mjkkGpPD6UUmoy52OykLLmnLgIk7rBSXIQG-5gdBVxVpSW9i5ENmNn8uw"/>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Warm</span>
+</div>
+</div>
+<!-- Intensity Slider -->
+<div class="px-container-padding mt-auto pb-10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-body-md font-medium text-on-surface-variant uppercase tracking-wider">Intensity</span>
+<span class="text-body-lg font-bold text-white" id="intensity-val">80</span>
+</div>
+<input class="w-full accent-primary-container" max="100" min="0" oninput="document.getElementById('intensity-val').innerText = this.value" type="range" value="80"/>
+</div>
+</div>
+<!-- Adjust View (Hidden by default) -->
+<div class="hidden flex-1 flex flex-col pt-4 overflow-y-auto no-scrollbar" id="view-adjust">
+<div class="px-container-padding space-y-6 pb-20">
+<!-- Slider Rows -->
+<div class="space-y-4">
+<div class="flex items-center space-x-4">
+<span class="w-24 text-body-md text-on-surface-variant">Brightness</span>
+<div class="flex-1">
+<input class="w-full" type="range"/>
+</div>
+<span class="w-8 text-right text-label-md text-white">0</span>
+<span class="material-symbols-outlined text-outline text-[18px]">fiber_manual_record</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="w-24 text-body-md text-on-surface-variant">Contrast</span>
+<div class="flex-1">
+<input class="w-full" type="range"/>
+</div>
+<span class="w-8 text-right text-label-md text-white">12</span>
+<span class="material-symbols-outlined text-outline text-[18px]">fiber_manual_record</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="w-24 text-body-md text-on-surface-variant">Saturation</span>
+<div class="flex-1">
+<input class="w-full" type="range"/>
+</div>
+<span class="w-8 text-right text-label-md text-white">45</span>
+<span class="material-symbols-outlined text-outline text-[18px]">fiber_manual_record</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="w-24 text-body-md text-on-surface-variant">Sharpness</span>
+<div class="flex-1">
+<input class="w-full" type="range"/>
+</div>
+<span class="w-8 text-right text-label-md text-white">0</span>
+<span class="material-symbols-outlined text-outline text-[18px]">fiber_manual_record</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="w-24 text-body-md text-on-surface-variant">Highlights</span>
+<div class="flex-1">
+<input class="w-full" type="range"/>
+</div>
+<span class="w-8 text-right text-label-md text-white">-5</span>
+<span class="material-symbols-outlined text-outline text-[18px]">fiber_manual_record</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar Logic (Suppressed as per "Task-Focused" rule) -->
+<script>
+        function switchTab(tab) {
+            const tabs = ['filter', 'adjust', 'vignette'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const indicator = document.getElementById(`indicator-${t}`);
+                const view = document.getElementById(`view-${t}`);
+                
+                if (t === tab) {
+                    btn.classList.add('text-on-surface', 'font-bold');
+                    btn.classList.remove('text-on-surface-variant', 'font-medium');
+                    indicator.classList.remove('opacity-0');
+                    if(view) view.classList.remove('hidden');
+                } else {
+                    btn.classList.remove('text-on-surface', 'font-bold');
+                    btn.classList.add('text-on-surface-variant', 'font-medium');
+                    indicator.classList.add('opacity-0');
+                    if(view) view.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize micro-interaction on filter items
+        document.querySelectorAll('#view-filter .flex-shrink-0').forEach(item => {
+            item.addEventListener('touchstart', () => {
+                item.style.transform = 'scale(0.95)';
+                item.style.transition = 'transform 0.1s ease';
+            });
+            item.addEventListener('touchend', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Projects Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #000000;
+            color: #f8dbe0;
+            -webkit-font-smoothing: antialiased;
+            overscroll-behavior-y: contain;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #FF4081 0%, #9C27B0 100%);
+        }
+        .circular-progress {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #FF4081;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#bb0054",
+                      "on-tertiary-fixed-variant": "#005317",
+                      "tertiary-fixed-dim": "#5ce069",
+                      "primary": "#ffb1c1",
+                      "on-tertiary-container": "#00320a",
+                      "inverse-on-surface": "#3d2c2f",
+                      "on-background": "#f8dbe0",
+                      "error-container": "#93000a",
+                      "on-secondary": "#570066",
+                      "surface-tint": "#ffb1c1",
+                      "on-surface": "#f8dbe0",
+                      "primary-container": "#ff4c86",
+                      "on-primary-fixed-variant": "#8f003f",
+                      "surface": "#1e0f12",
+                      "on-primary-fixed": "#3f0018",
+                      "primary-fixed-dim": "#ffb1c1",
+                      "on-secondary-fixed": "#35003f",
+                      "tertiary": "#5ce069",
+                      "on-secondary-container": "#f7a0ff",
+                      "surface-variant": "#423033",
+                      "surface-container-highest": "#423033",
+                      "outline-variant": "#5a4045",
+                      "primary-fixed": "#ffd9df",
+                      "on-primary-container": "#590024",
+                      "surface-container": "#2b1b1e",
+                      "surface-bright": "#473438",
+                      "on-surface-variant": "#e2bdc3",
+                      "surface-container-high": "#362529",
+                      "secondary-fixed": "#ffd6fe",
+                      "on-primary": "#66002a",
+                      "tertiary-container": "#0fa739",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "secondary": "#f9abff",
+                      "surface-container-low": "#27171a",
+                      "on-tertiary-fixed": "#002105",
+                      "secondary-fixed-dim": "#f9abff",
+                      "secondary-container": "#86039c",
+                      "on-secondary-fixed-variant": "#7b008f",
+                      "surface-dim": "#1e0f12",
+                      "on-error-container": "#ffdad6",
+                      "inverse-surface": "#f8dbe0",
+                      "surface-container-lowest": "#180a0d",
+                      "tertiary-fixed": "#79fe82",
+                      "outline": "#a9888e",
+                      "on-tertiary": "#00390d",
+                      "background": "#1e0f12"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "touch-target-min": "44px",
+                      "unit": "4px",
+                      "gutter": "12px",
+                      "container-padding": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "display": ["Hanken Grotesk"],
+                      "body-md": ["Geist"],
+                      "label-sm": ["Geist"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-md": ["Geist"],
+                      "body-lg": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface select-none">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="fixed top-0 w-full z-50 bg-black flex justify-between items-center px-container-padding h-touch-target-min">
+<h1 class="font-display text-display text-on-surface">Projects</h1>
+<div class="flex gap-4 items-center">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">search</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pt-16 pb-24">
+<!-- Filter Tabs -->
+<div class="px-container-padding py-unit flex gap-2 overflow-x-auto custom-scrollbar">
+<button class="px-5 py-2 rounded-full primary-gradient text-white font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">All</button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Videos</button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Photos</button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Drafts</button>
+</div>
+<!-- Sort & Count Row -->
+<div class="px-container-padding flex justify-between items-center mt-6 mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">12 projects</span>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="font-label-md text-label-md">Last edited</span>
+<span class="material-symbols-outlined text-[18px]">sort</span>
+</button>
+</div>
+<!-- Projects Grid -->
+<div class="px-container-padding grid grid-cols-2 gap-3">
+<!-- Project Card 1 (Normal) -->
+<div class="bg-[#1a1a1a] rounded-xl overflow-hidden flex flex-col group active:opacity-90 transition-opacity">
+<div class="relative aspect-video w-full bg-surface-container-high">
+<img alt="Cyberpunk Cityscape" class="w-full h-full object-cover opacity-80" data-alt="A cinematic low-angle shot of a neon-drenched city street at night, with rain reflecting vibrant pink and purple lights on the pavement. The atmosphere is moody and professional, echoing a high-end mobile video editing interface with sharp details and deep blacks." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgMeQ5tyC7QAMQaDlrV4LXL2Lch7QO92Nh-rYxr9wbEZTfYPbHAH2gRQuHPmUWyjDagc-lINSzMg6-UicGtT5XGBmB3tlGRdbF51ihTkW_k0F00WThR2aHib2daFtspgMMVBdgQT_5p0_iWabN03uZI-83O9xTbwgZleWU7dj-0DXduJidcGngF91jt5K5UJYjuSF-p6rhHt5O3N2xwCk-LUvImPUqjXsHuFhvtlHNhyajjW2Kk_LF36akuX9DGOy8oFd6Ea_x_DM"/>
+<div class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10">
+<span class="text-[10px] font-bold text-white tracking-tighter">1080p</span>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md">
+<span class="text-[10px] font-bold text-white">00:45</span>
+</div>
+</div>
+<div class="p-3 flex justify-between items-start">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Neon Night Ride</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">history</span>
+<span class="text-[10px] text-on-surface-variant">2 days ago</span>
+</div>
+</div>
+<button class="p-1 -mr-1">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Project Card 2 (Processing State) -->
+<div class="bg-[#1a1a1a] rounded-xl overflow-hidden flex flex-col group border border-primary-container/30">
+<div class="relative aspect-video w-full bg-surface-container-high">
+<img alt="Abstract Smoke" class="w-full h-full object-cover blur-sm opacity-40" data-alt="A macro close-up of colorful smoke swirling in deep darkness, featuring rich gradients of violet and fuchsia. The lighting is dramatic and localized, creating a high-contrast cinematic texture suitable for a professional video editing app background. The focus is sharp on the intricate vapor patterns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9sHYogRUp1bLngBkGpRED2e-KYogEcCrYnNGmgzf9fi4adLKlh6llTfP-Wgi3XSI9r5LnGLQHuVuBglJlSKHOBqgHQDTG8HiFulnYhyCC6h2N7pLX43MytUTsbpp-XSkJXy49MMeCT8zcS8uoO4lYWoZudot8IL3_1J_dMrt0tu-OAhfzuggAk-oFzrOrFShf5j51PhZaiD8JH1mM4HvE0_oL4yC_ikbp-cr0Lbw2EOkkG5TpWRNH7aB0NSQOG5hak1zpSQtdbEw"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 gap-2">
+<div class="circular-progress"></div>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">Processing...</span>
+</div>
+</div>
+<div class="p-3 flex justify-between items-start">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Vapor Dynamics</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">history</span>
+<span class="text-[10px] text-on-surface-variant">Just now</span>
+</div>
+</div>
+<button class="p-1 -mr-1">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#1a1a1a] rounded-xl overflow-hidden flex flex-col group">
+<div class="relative aspect-video w-full bg-surface-container-high">
+<img alt="Mountain Road" class="w-full h-full object-cover opacity-80" data-alt="A majestic aerial drone view of a winding road cutting through a dense, foggy pine forest at sunrise. The colors are muted and professional, with deep forest greens and soft golden highlights. The scene evokes a sense of cinematic travel and high-quality videography typical of creative studio projects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLv1hG8ZqgTAj1u23e81Fk0C-jKiUc3ytTNxkWUy6ODap1FtN3rRGB0MgxvxfNwJ03XmLAQ2qfSPgBTZFDFSXQUhnVGGkdMvwy56dpOR88yRwGWTGWaQzWVHyN8qopqygd0P6YFEDaqcnhvV7KUB2SH_ucKkZhf96bbCxJKyvBuB3qKPVFBHxxNBp2xs49q93ddWRU6OZb75LB7QfOBf2jwWzCUMBQIoOrqGRRXtnTp4kqZNbCmEDdSDhDp6UNaQvtUlklxOVng0Y"/>
+<div class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10">
+<span class="text-[10px] font-bold text-white tracking-tighter">4K</span>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md">
+<span class="text-[10px] font-bold text-white">01:12</span>
+</div>
+</div>
+<div class="p-3 flex justify-between items-start">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Foggy Pass Vlog</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">history</span>
+<span class="text-[10px] text-on-surface-variant">1 week ago</span>
+</div>
+</div>
+<button class="p-1 -mr-1">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-[#1a1a1a] rounded-xl overflow-hidden flex flex-col group">
+<div class="relative aspect-video w-full bg-surface-container-high">
+<img alt="Skater Trick" class="w-full h-full object-cover opacity-80" data-alt="A portrait of a skater performing a trick in mid-air at an urban skatepark, frozen in time with high-speed shutter effects. The background features harsh shadows and golden hour lighting, creating a high-energy and professional aesthetic. The color palette uses deep browns and warm ambers against a dark, industrial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe4liZ_ZK-df2oe0CpcV9NOPY7q9VOsIOtyltkdyRyVN3taXNr-D-4Nq8p6RkK-1oFK1i3oRIYiGMKFepnosrWWH8Pd1fJjxkdCRdZW1AwPLuIWghFAycw-fep9I0gBMwEra0dRtbIPkCNqavtQb20NCw8hNClpH7sgZ88AHpstcFW4XWf_wXDVwhKhW2kPigwmPICecrCQXL0qMG-M0BGHkiLVR6_ck5_T1-rx0Zkv1JlNmz0p3JbZFRwoFHKzg6Evj42oVR5Nmk"/>
+<div class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10">
+<span class="text-[10px] font-bold text-white tracking-tighter">1080p</span>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md">
+<span class="text-[10px] font-bold text-white">00:15</span>
+</div>
+</div>
+<div class="p-3 flex justify-between items-start">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface truncate max-w-[110px]">Urban Edge Edit</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-surface-variant">history</span>
+<span class="text-[10px] text-on-surface-variant">3 days ago</span>
+</div>
+</div>
+<button class="p-1 -mr-1">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Additional placeholders to demonstrate scrolling -->
+<div class="bg-[#1a1a1a] h-40 rounded-xl animate-pulse"></div>
+<div class="bg-[#1a1a1a] h-40 rounded-xl animate-pulse"></div>
+</div>
+</main>
+<!-- FAB: Create New Project -->
+<button class="fixed right-6 bottom-20 w-14 h-14 primary-gradient rounded-full shadow-2xl flex items-center justify-center text-white z-50 transition-transform active:scale-90 active:shadow-inner">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- Bottom Navigation Bar (Shared Component Strategy) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-gutter bg-surface-container-lowest/80 backdrop-blur-xl border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-primary transition-transform active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="font-label-md text-label-md">Projects</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-transform active:scale-90">
+<span class="material-symbols-outlined">movie_filter</span>
+<span class="font-label-md text-label-md">Template</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-transform active:scale-90">
+<span class="material-symbols-outlined">cloud_done</span>
+<span class="font-label-md text-label-md">Cloud</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-transform active:scale-90">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for filter tabs
+        const tabs = document.querySelectorAll('.filter-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('primary-gradient', 'text-white');
+                    t.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                tab.classList.add('primary-gradient', 'text-white');
+                tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

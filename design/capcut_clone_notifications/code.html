@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notifications - Video Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#5ce069",
+                    "on-tertiary-fixed-variant": "#005317",
+                    "on-background": "#f8dbe0",
+                    "inverse-primary": "#bb0054",
+                    "background": "#000000",
+                    "tertiary-fixed": "#79fe82",
+                    "surface-variant": "#423033",
+                    "on-surface": "#f8dbe0",
+                    "surface-container": "#2b1b1e",
+                    "surface-container-high": "#362529",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#f9abff",
+                    "primary-container": "#ff4c86",
+                    "surface-dim": "#1e0f12",
+                    "outline-variant": "#5a4045",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#002105",
+                    "secondary-fixed": "#ffd6fe",
+                    "surface-container-low": "#27171a",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#3d2c2f",
+                    "on-secondary-fixed": "#35003f",
+                    "on-tertiary-container": "#00320a",
+                    "on-primary-fixed": "#3f0018",
+                    "on-surface-variant": "#e2bdc3",
+                    "inverse-surface": "#f8dbe0",
+                    "surface-container-highest": "#423033",
+                    "on-secondary-fixed-variant": "#7b008f",
+                    "on-primary": "#66002a",
+                    "primary-fixed": "#ffd9df",
+                    "on-primary-fixed-variant": "#8f003f",
+                    "surface": "#1e0f12",
+                    "on-primary-container": "#590024",
+                    "surface-bright": "#473438",
+                    "on-secondary": "#570066",
+                    "tertiary-fixed-dim": "#5ce069",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "tertiary-container": "#0fa739",
+                    "on-tertiary": "#00390d",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#ffb1c1",
+                    "on-secondary-container": "#f7a0ff",
+                    "surface-container-lowest": "#180a0d",
+                    "outline": "#a9888e",
+                    "secondary": "#f9abff",
+                    "secondary-container": "#86039c",
+                    "primary": "#ffb1c1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "touch-target-min": "44px",
+                    "gutter": "12px",
+                    "unit": "4px",
+                    "container-padding": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "label-md": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "display": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: white;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md selection:bg-primary-container/30">
+<!-- Top AppBar (from Shared Components JSON) -->
+<header class="fixed top-0 w-full z-50 flex items-center px-gutter h-touch-target-min bg-background transition-opacity active:opacity-70">
+<div class="flex items-center w-full justify-between">
+<button class="w-10 h-10 flex items-center justify-start text-on-surface">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Notifications</h1>
+<button class="px-3 h-10 flex items-center justify-end text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined">done_all</span>
+</button>
+</div>
+</header>
+<main class="pt-touch-target-min pb-24">
+<!-- Filter Tabs -->
+<div class="sticky top-touch-target-min z-40 bg-background/95 backdrop-blur-md px-container-padding py-3">
+<div class="flex gap-2 overflow-x-auto no-scrollbar">
+<button class="px-5 py-2 rounded-full bg-primary-container text-white font-label-md text-label-md transition-all active:scale-95 flex-shrink-0">
+                    All
+                </button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all active:scale-95 flex-shrink-0">
+                    Likes
+                </button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all active:scale-95 flex-shrink-0">
+                    Comments
+                </button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all active:scale-95 flex-shrink-0">
+                    System
+                </button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all active:scale-95 flex-shrink-0">
+                    Mentions
+                </button>
+</div>
+</div>
+<!-- Notification List -->
+<section class="mt-2">
+<!-- Group: TODAY -->
+<div class="px-container-padding py-2">
+<h2 class="text-on-surface-variant font-label-md text-[10px] tracking-widest uppercase opacity-60">Today</h2>
+</div>
+<!-- Unread: Alex Edits -->
+<div class="relative flex items-center gap-3 px-container-padding py-4 bg-[#111111] transition-colors hover:bg-surface-container active:scale-[0.98]">
+<div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#ff4c86]"></div>
+<div class="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
+<img alt="Alex Edits Avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a young man with a focused expression, styled in a modern urban environment. The lighting is cinematic with deep shadows and soft rim lights, reflecting a professional video editor persona. The color palette is muted with slight pink highlights to match the brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9DZ6Wy3433V3E2eFf5UQ5XqO_ctn49_Es6VThLSWXFiPh8XU-S89bo56BhBp5fVNcpnBVkKZkYM5PO4oBEhSPyVo6-K1sABbNxw6kliqPAzaL9FCeNFcl7k6q2_drSZRpfUyZbp13ADFKNLrx6e6HP0Y8FPZeOXOUkw-IxO2g8UyitiiN7rGhG8dcNroJRKatrCBWlmNWwpmBjfZtx9AVwq1WKCFPG18qiAYxW2cZDM_6DzW7UN6rGvkA3g1qvWwEkJ8wM7AdHAA"/>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface truncate">
+<span class="font-bold">@alex_edits</span> liked your video
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">2m ago</p>
+</div>
+<div class="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
+<img alt="Video Thumbnail" class="w-full h-full object-cover" data-alt="A vibrant cinematic video frame showing a futuristic city street at night with neon lights reflecting off rainy pavement. The scene is shot with high-end anamorphic lenses, featuring deep blacks and glowing pink and purple neon accents, maintaining the sleek modern aesthetic of the video editor application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG-aS2KzXJB3WLTiDrLMp9ctMmoBJ2PAAdtv0xYaq6DO-PHv_RLzKLHGCuHCDnieGvTo6sufqpxOKql3VWi_Zg2l1REl7LiRjS2l1h-STo_xzuAL00eYgcDXbtdlQ6EmNyPNOQCWzj42oAN9i7EYvlWl5i_Juag8RTK00qxV4APN2F8eI9UV8v2Fhoj-7CVzAIBDXJncLoFEV12zW4aGrJJ57wkKEtAl7Xdt0Q6_CyNr4O85ldortGbYSnENPSgVVW3pmedh7dgGw"/>
+</div>
+</div>
+<!-- Unread: System Notification -->
+<div class="relative flex items-center gap-3 px-container-padding py-4 bg-[#111111] transition-colors hover:bg-surface-container active:scale-[0.98]">
+<div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#ff4c86]"></div>
+<div class="w-11 h-11 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface truncate">
+<span class="font-bold">CapCut</span>: Your export is complete
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">1h ago</p>
+</div>
+</div>
+<!-- Group: YESTERDAY -->
+<div class="px-container-padding py-2 mt-4">
+<h2 class="text-on-surface-variant font-label-md text-[10px] tracking-widest uppercase opacity-60">Yesterday</h2>
+</div>
+<!-- Read: Maya VFX -->
+<div class="flex items-center gap-3 px-container-padding py-4 bg-background transition-colors hover:bg-surface-container-low active:scale-[0.98]">
+<div class="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
+<img alt="Maya VFX Avatar" class="w-full h-full object-cover" data-alt="A portrait of a creative woman with a sleek aesthetic, featuring professional studio lighting. The background is a clean, dark gray, and she wears a minimalist black outfit. Her expression is friendly yet professional, fitting the community of a high-end video editing software user base." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCmuyIxusN9a2UeypZoP0UqZbbl04AabnawSbtPY4vbxQB1-onUXkGhCfEHczcX5JaINZ1oTX5v5WTY4XCYg0oG-8cR8iTGcFu6RAr_UYpkpWMBy--ct6DujOPHJk8lsz6ucVtEY_Ij6RDzxnS6IGC7OyfjOKBEzYXE-MiCy-GsE8l3W7vy_oVbkJhrs9XHgM453RFAZS-WVcOBE-_ixSflsoB-3XLRF7KwBPDHu5oOxeL9aAWS_aKAqE-6LBq-nxCspkC_D5erms"/>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface truncate">
+<span class="font-bold">@maya.vfx</span> commented: Great edit!
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">Yesterday</p>
+</div>
+<div class="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 border border-white/5">
+<img alt="Video Thumbnail" class="w-full h-full object-cover" data-alt="Abstract dynamic light trails moving through a dark void. The light trails are a mix of intense pink and cool blue, creating a high-energy sense of motion and visual effects mastery. The composition is sleek and professional, mirroring the quality of a top-tier video production tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhu9WOopFauGjR-h0OynKGMuHixewc_yftTsFiPkCP2umOraKtdE960F7lnWfFbbzYYUJzMSI50SoYLm9bNF9DOXCEJilzn_txm0BKPaLSFIwF6_Pff5ij1imDoZ0tMYyfOiN34gN6rlg-mvfd-DE5QzswOpKDbdO_ZyKN8gUdmhkbtXiQmdMtaqXLloL9khda-euZPXV5bXxvLuMgp72m6-nvrv4a1p-q-XkBE1r6xe4uMDX9jZgjb9aCeHp5Qy2qS2lnLih3NA"/>
+</div>
+</div>
+<!-- Read: Lucas Edits -->
+<div class="flex items-center gap-3 px-container-padding py-4 bg-background transition-colors hover:bg-surface-container-low active:scale-[0.98]">
+<div class="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
+<img alt="Lucas Avatar" class="w-full h-full object-cover" data-alt="A sharp, minimalist headshot of a young professional man in a tech-focused setting. Warm, subtle highlights contrast against a dark background, creating a cinematic look that aligns with the professional creative app's visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYDtp4R0TEN22tt-L4CfKDDHFhz4JcBlER-R250p10NLefWY0kLx27uzdcr8TdCe3UxHKd5RoZm-PyCK0cj73rHDtAz4MhWhPGxIE4aJN-sSp0JF1MUMZfkMaC83j2gg2k6pZkBrBXcFtYEWDtXEmQ_numr8ndb1VMM_e9XJnjeSSGSzdeEgtDANYt0j-uAO3TmIAgxry4yNjqu6TJFIgCdAaSAEJZy0WzIDOCygf_qW1sXk95g6qABJP5wwxotJ3G4KcWlWi4sVI"/>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface truncate">
+<span class="font-bold">@lucas_motion</span> shared your post
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">Yesterday</p>
+</div>
+<div class="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0 border border-white/5">
+<img alt="Video Thumbnail" class="w-full h-full object-cover" data-alt="Close-up of a high-tech editing interface with a blurred background showing color grading wheels and waveform monitors. The lighting is low and focused, emphasizing the precision tools. Deep black levels and sharp vibrant highlights represent the professional editing environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuUI4k_s1E3XjhQp6AioZd8Ib9IsPF8yhmBJ9LbSn8AYsjci8bCXg483lIIzprTCyx85cOiutzUarp5TjOt19uZEsAxHwwFcvYQaL2chfU8iN_kTq19LBflelYIe8ryjKix_nDAxJo-txFraHcICtlFxMQbOl3UozUtYiDyyYr6oHnOYPOYrK0puG7R5F05c-WkjgrKMiG7QebxBSJdYboP5fRqI6dZcdD5fHQ-pwr06kp0LcH-BZYZBmVvOO-BvLE3BcxARK3im0"/>
+</div>
+</div>
+<!-- Group: THIS WEEK -->
+<div class="px-container-padding py-2 mt-4">
+<h2 class="text-on-surface-variant font-label-md text-[10px] tracking-widest uppercase opacity-60">This Week</h2>
+</div>
+<!-- Read: System Update -->
+<div class="flex items-center gap-3 px-container-padding py-4 bg-background transition-colors hover:bg-surface-container-low active:scale-[0.98]">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">new_releases</span>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface">
+<span class="font-bold">New Features</span>: 4K HDR export now available
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">3 days ago</p>
+</div>
+</div>
+<!-- Read: Cloud Backup -->
+<div class="flex items-center gap-3 px-container-padding py-4 bg-background transition-colors hover:bg-surface-container-low active:scale-[0.98]">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">cloud_done</span>
+</div>
+<div class="flex-grow min-w-0">
+<p class="font-label-md text-on-surface">
+<span class="font-bold">Storage</span>: All projects backed up successfully
+                    </p>
+<p class="text-on-surface-variant text-[13px] mt-0.5">4 days ago</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom NavBar (from Shared Components JSON) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-container-padding h-touch-target-min bg-surface-container transition-transform active:scale-95">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<div class="w-10 h-8 rounded-lg flex items-center justify-center bg-white text-black">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</div>
+</a>
+<a class="flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for tabs
+        const tabs = document.querySelectorAll('.filter-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary-container', 'text-white');
+                    t.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                tab.classList.add('bg-primary-container', 'text-white');
+            });
+        });
+
+        // Add a simple scroll effect to top bar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('bg-background/80', 'backdrop-blur-xl');
+            } else {
+                header.classList.remove('bg-background/80', 'backdrop-blur-xl');
+            }
+        });
+    </script>
+</body></html>

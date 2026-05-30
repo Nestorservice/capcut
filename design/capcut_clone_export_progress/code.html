@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Noir - Exporting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 34, 34, 1);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "inverse-primary": "#bb0054",
+                        "surface-variant": "#423033",
+                        "primary": "#ffb1c1",
+                        "on-tertiary": "#00390d",
+                        "on-primary-container": "#590024",
+                        "surface-dim": "#1e0f12",
+                        "surface-container-lowest": "#180a0d",
+                        "inverse-on-surface": "#3d2c2f",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#362529",
+                        "secondary-fixed-dim": "#f9abff",
+                        "on-tertiary-fixed-variant": "#005317",
+                        "on-primary-fixed": "#3f0018",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#ffb1c1",
+                        "surface-container": "#2b1b1e",
+                        "on-background": "#f8dbe0",
+                        "tertiary-container": "#0fa739",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-primary": "#66002a",
+                        "on-secondary": "#570066",
+                        "outline-variant": "#5a4045",
+                        "tertiary": "#5ce069",
+                        "surface-container-highest": "#423033",
+                        "outline": "#a9888e",
+                        "surface-container-low": "#27171a",
+                        "tertiary-fixed": "#79fe82",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#ffd9df",
+                        "surface-bright": "#473438",
+                        "secondary-fixed": "#ffd6fe",
+                        "primary-container": "#ff4c86",
+                        "on-primary-fixed-variant": "#8f003f",
+                        "background": "#1e0f12",
+                        "on-tertiary-fixed": "#002105",
+                        "inverse-surface": "#f8dbe0",
+                        "secondary-container": "#86039c",
+                        "on-surface": "#f8dbe0",
+                        "secondary": "#f9abff",
+                        "on-tertiary-container": "#00320a",
+                        "on-secondary-container": "#f7a0ff",
+                        "surface": "#1e0f12",
+                        "tertiary-fixed-dim": "#5ce069",
+                        "on-surface-variant": "#e2bdc3",
+                        "on-secondary-fixed-variant": "#7b008f",
+                        "on-secondary-fixed": "#35003f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "touch-target-min": "44px",
+                        "gutter": "12px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "display": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-sm": ["10px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface flex flex-col min-h-screen">
+<!-- Top AppBar (The Anchors) -->
+<header class="fixed top-0 w-full flex justify-between items-center px-container-padding h-touch-target-min bg-background border-b border-outline-variant z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-transform">close</span>
+<h1 class="font-display text-display text-primary uppercase tracking-tighter text-[16px]">KINETIC NOIR</h1>
+</div>
+<button class="font-label-md text-label-md text-primary uppercase tracking-widest opacity-50 cursor-not-allowed">
+            EXPORT
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-container-padding pt-touch-target-min pb-24">
+<!-- Video Preview Thumbnail (Subtle Glassmorphism) -->
+<div class="w-full aspect-video rounded-xl overflow-hidden mb-12 glass-panel relative group">
+<img alt="Video Preview" class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A cinematic low-angle shot of a neon-drenched city street at night in a futuristic noir style. Deep magenta and purple lighting reflects off wet asphalt, creating a high-contrast atmosphere. The scene is framed with professional depth of field, emphasizing a moody, tech-focused aesthetic consistent with a premium video editing interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDemkB1sx91AaExG5IbjX1cEEjEoB3w7Lw1_PPpr3SjQWsp2bn76G31Az5A8IpQW-xrztca8JLh8OiUxWltJ3SgJK-KJcBSlHWUq8IF_tI4-nn2GdkMolMzQzxjjKwTN7xxuUND7tsKtO6Pkx7bWybpdaMYzmxbkdvD29ue74x7j_BYc3rXinTr-PnOK4rGo5rjILUvAHbmeBVdLZ_zLwvB3Dz5ZJv3JmwrO-vMyN1GKQJsytqATnv5c8AG2D_NVZLsL_lNlrzhIuA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-black/40 backdrop-blur-md">
+<span class="material-symbols-outlined text-white text-[20px]" data-weight="fill">movie_edit</span>
+</div>
+</div>
+</div>
+<!-- Circular Progress Section -->
+<div class="relative flex items-center justify-center mb-8">
+<svg class="drop-shadow-[0_0_15px_rgba(255,177,193,0.3)]" height="140" width="140">
+<!-- Background Circle -->
+<circle cx="70" cy="70" fill="transparent" r="60" stroke="#2b1b1e" stroke-width="2"></circle>
+<!-- Progress Circle -->
+<circle class="progress-ring__circle" cx="70" cy="70" fill="transparent" r="60" stroke="#ffb1c1" stroke-dasharray="376.99" stroke-dashoffset="124.4" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display text-display text-white">67%</span>
+</div>
+</div>
+<!-- Progress Labels -->
+<div class="text-center mb-10">
+<h2 class="font-headline-md text-headline-md text-white mb-1">Exporting...</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Optimizing for 1080p...</p>
+</div>
+<!-- Linear Progress Bar & Stats -->
+<div class="w-full max-w-sm space-y-3">
+<div class="w-full h-[2px] bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[67%] animate-pulse-glow"></div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="font-label-md text-label-md">01:23 remaining</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">hd</span>
+<span class="font-label-md text-label-md">1080p / 30fps</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Action -->
+<footer class="fixed bottom-0 w-full p-8 flex justify-center items-center z-50">
+<button class="px-8 py-3 font-label-md text-label-md text-on-surface-variant hover:text-white transition-colors uppercase tracking-[0.2em] active:scale-95">
+            Cancel
+        </button>
+</footer>
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[30%] h-[30%] bg-secondary-container/5 blur-[100px] rounded-full"></div>
+</div>
+<script>
+        // Simulate minor progress increment for micro-interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressCircle = document.querySelector('.progress-ring__circle');
+            const linearProgress = document.querySelector('.animate-pulse-glow');
+            const percentText = document.querySelector('.font-display.text-white');
+            
+            let progress = 67;
+            const radius = 60;
+            const circumference = 2 * Math.PI * radius;
+
+            const updateProgress = (val) => {
+                const offset = circumference - (val / 100) * circumference;
+                progressCircle.style.strokeDashoffset = offset;
+                linearProgress.style.width = `${val}%`;
+                percentText.textContent = `${Math.floor(val)}%`;
+            };
+
+            // Set initial state
+            updateProgress(67);
+
+            // Subtle creep for realism
+            setInterval(() => {
+                if (progress < 99) {
+                    progress += 0.05;
+                    updateProgress(progress);
+                }
+            }, 500);
+        });
+    </script>
+</body></html>
