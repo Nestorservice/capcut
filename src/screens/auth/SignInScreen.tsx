@@ -12,7 +12,7 @@ import { useAuth } from '@hooks/useAuth';
 type Props = NativeStackScreenProps<AuthStackParamList, 'SignIn'>;
 
 export function SignInScreen({ navigation }: Props) {
-  const { signIn, isLoading } = useAuth();
+  const { signIn, signInWithGoogle, isLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -59,7 +59,7 @@ export function SignInScreen({ navigation }: Props) {
           <View style={styles.dividerLine} />
         </View>
 
-        <Button label="Continue with Google" variant="outline" size="lg" fullWidth icon="g-translate" onPress={() => undefined} />
+        <Button label="Continue with Google" variant="outline" size="lg" fullWidth icon="g-translate" loading={isLoading} onPress={signInWithGoogle} />
 
         <Pressable onPress={() => navigation.replace('SignUp')} style={styles.footerLink}>
           <Text style={styles.footerText}>

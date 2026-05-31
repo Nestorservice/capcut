@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Image, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSequence, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withSequence, withSpring, withTiming } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 import { AuthStackParamList } from '@types/navigation.types';
 import { Colors } from '@constants/colors';
@@ -14,6 +14,10 @@ export function SplashScreen({ navigation }: Props) {
   const opacity = useSharedValue(0);
   const subtitleOpacity = useSharedValue(0);
 
+  const goNext = React.useCallback(() => {
+    navigation.replace('Onboarding');
+  }, [navigation]);
+
   useEffect(() => {
     scale.value = withSpring(1, { damping: 14, stiffness: 130 });
     opacity.value = withTiming(1, { duration: 700 });
@@ -23,14 +27,15 @@ export function SplashScreen({ navigation }: Props) {
       scale.value = withSequence(withTiming(1.05, { duration: 220 }), withTiming(0.95, { duration: 220 }));
       opacity.value = withTiming(0, { duration: 350 });
       subtitleOpacity.value = withTiming(0, { duration: 350 }, finished => {
+        'worklet';
         if (finished) {
-          navigation.replace('Onboarding');
+          runOnJS(goNext)();
         }
       });
     }, 1800);
 
     return () => clearTimeout(timer);
-  }, [navigation, opacity, scale, subtitleOpacity]);
+  }, [goNext, opacity, scale, subtitleOpacity]);
 
   const logoStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,

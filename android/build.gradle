@@ -4,8 +4,9 @@ buildscript {
         minSdkVersion = 24
         compileSdkVersion = 36
         targetSdkVersion = 36
-        ndkVersion = "27.1.12297006"
+        ndkVersion = "26.3.11579264"
         kotlinVersion = "2.1.20"
+        ffmpegKitPackage = "full-gpl"
     }
     repositories {
         google()
@@ -15,7 +16,62 @@ buildscript {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("com.google.gms:google-services:4.4.2")
     }
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+// Bootstrap ffmpeg-kit local Maven repo (runs once at configuration time, result is cached)
+def ffmpegGroup    = "com.arthenica"
+def ffmpegArtifact = "ffmpeg-kit-full-gpl"
+def ffmpegVersion  = "6.0-2"
+def localMaven     = file("${rootDir}/ffmpeg-local-maven")
+def artifactDir    = new File(localMaven, "${ffmpegGroup.replace('.','/')}/${ffmpegArtifact}/${ffmpegVersion}")
+def aarFile        = new File(artifactDir, "${ffmpegArtifact}-${ffmpegVersion}.aar")
+def pomFile        = new File(artifactDir, "${ffmpegArtifact}-${ffmpegVersion}.pom")
+
+if (!aarFile.exists()) {
+    logger.lifecycle("[ffmpeg-kit] Downloading ${ffmpegArtifact}.aar (one-time, please wait)...")
+    artifactDir.mkdirs()
+    try {
+        def con = new URL("https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar").openConnection()
+        con.connectTimeout = 60000
+        con.readTimeout    = 600000
+        def is = con.getInputStream()
+        try { aarFile.withOutputStream { os -> os << is } } finally { is.close() }
+        logger.lifecycle("[ffmpeg-kit] Download complete (${aarFile.length()} bytes)")
+    } catch (Exception e) {
+        logger.error("[ffmpeg-kit] Auto-download failed: ${e.message}")
+        logger.error("[ffmpeg-kit] Manual fix: download ffmpeg-kit-full-gpl.aar from")
+        logger.error("[ffmpeg-kit]   https://github.com/NooruddinLakhani/ffmpeg-kit-full-gpl/releases/download/v1.0.0/ffmpeg-kit-full-gpl.aar")
+        logger.error("[ffmpeg-kit] and place it at: ${aarFile.absolutePath}")
+    }
+}
+
+if (!pomFile.exists() && aarFile.exists()) {
+    artifactDir.mkdirs()
+    pomFile.text = """<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${ffmpegGroup}</groupId>
+  <artifactId>${ffmpegArtifact}</artifactId>
+  <version>${ffmpegVersion}</version>
+  <packaging>aar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.arthenica</groupId>
+      <artifactId>smart-exception-java</artifactId>
+      <version>0.2.1</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
+"""
+}
+
+allprojects {
+    repositories {
+        maven { url localMaven.toURI() }
+    }
+}

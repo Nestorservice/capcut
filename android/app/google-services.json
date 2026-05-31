@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "558440047357",
+    "project_id": "ronymind-1bda9",
+    "storage_bucket": "ronymind-1bda9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558440047357:android:406e7e2b61574e50e45494",
+        "android_client_info": {
+          "package_name": "cm.ronymind.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqxiOYHykJ7R3C5irWm5aZLt_6NX_gfN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558440047357:android:24376a423258e8f0e45494",
+        "android_client_info": {
+          "package_name": "com.captcut"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqxiOYHykJ7R3C5irWm5aZLt_6NX_gfN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

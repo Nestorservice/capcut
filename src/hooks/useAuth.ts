@@ -24,7 +24,7 @@ export function useAuth() {
     let active = true;
     void (async () => {
       try {
-        const current = await authService.getSession();
+        const current = await authService.getSession().catch(() => null);
         if (!active) return;
         setSession(current, current?.user ?? null);
         if (current?.user) {
@@ -39,22 +39,28 @@ export function useAuth() {
         if (active) setHydrated(true);
       }
     })();
-    const unsub = authService.onAuthStateChange(async s => {
-      setSession(s, s?.user ?? null);
-      if (s?.user) {
-        try {
-          const p = await usersService.getProfile(s.user.id);
-          setProfile(p);
-        } catch {
-          // ignore
+    let unsub: (() => void) | undefined;
+    try {
+      unsub = authService.onAuthStateChange(async s => {
+        setSession(s, s?.user ?? null);
+        if (s?.user) {
+          try {
+            const p = await usersService.getProfile(s.user.id);
+            setProfile(p);
+          } catch {
+            // ignore
+          }
+        } else {
+          setProfile(null);
         }
-      } else {
-        setProfile(null);
-      }
-    });
+      });
+    } catch {
+      // Supabase not configured — stay unauthenticated
+      setHydrated(true);
+    }
     return () => {
       active = false;
-      unsub();
+      unsub?.();
     };
   }, [setHydrated, setProfile, setSession]);
 
@@ -89,6 +95,18 @@ export function useAuth() {
     [setLoading, showToast],
   );
 
+  const signInWithGoogle = useCallback(async () => {
+    setLoading(true);
+    try {
+      await authService.signInWithGoogle();
+    } catch (e) {
+      showToast((e as Error).message, 'error');
+      throw e;
+    } finally {
+      setLoading(false);
+    }
+  }, [setLoading, showToast]);
+
   const signOut = useCallback(async () => {
     try {
       await authService.signOut();
@@ -107,6 +125,7 @@ export function useAuth() {
     isAuthenticated: !!session,
     signIn,
     signUp,
+    signInWithGoogle,
     signOut,
   };
 }
