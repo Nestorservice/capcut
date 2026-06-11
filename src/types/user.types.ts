@@ -11,16 +11,6 @@ export interface UserProfile {
   updated_at: string;
 }
 
-export interface AuthCredentials {
-  email: string;
-  password: string;
-}
-
-export interface SignUpCredentials extends AuthCredentials {
-  username: string;
-  display_name?: string;
-}
-
 export interface AuthSession {
   userId: string;
   email: string;

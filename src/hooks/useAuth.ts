@@ -3,7 +3,6 @@ import { useAuthStore } from '@store/authStore';
 import { authService } from '@services/supabase/auth.service';
 import { usersService } from '@services/supabase/users.service';
 import { useUIStore } from '@store/uiStore';
-import { AuthCredentials, SignUpCredentials } from '@types/user.types';
 
 export function useAuth() {
   const {
@@ -64,41 +63,10 @@ export function useAuth() {
     };
   }, [setHydrated, setProfile, setSession]);
 
-  const signIn = useCallback(
-    async (creds: AuthCredentials) => {
-      setLoading(true);
-      try {
-        await authService.signInWithEmail(creds);
-      } catch (e) {
-        showToast((e as Error).message, 'error');
-        throw e;
-      } finally {
-        setLoading(false);
-      }
-    },
-    [setLoading, showToast],
-  );
-
-  const signUp = useCallback(
-    async (creds: SignUpCredentials) => {
-      setLoading(true);
-      try {
-        await authService.signUpWithEmail(creds);
-        showToast('Account created. Check your email to verify.', 'success');
-      } catch (e) {
-        showToast((e as Error).message, 'error');
-        throw e;
-      } finally {
-        setLoading(false);
-      }
-    },
-    [setLoading, showToast],
-  );
-
-  const signInWithGoogle = useCallback(async () => {
+  const signInAnonymously = useCallback(async () => {
     setLoading(true);
     try {
-      await authService.signInWithGoogle();
+      await authService.signInAnonymously();
     } catch (e) {
       showToast((e as Error).message, 'error');
       throw e;
@@ -123,9 +91,7 @@ export function useAuth() {
     isLoading,
     isHydrated,
     isAuthenticated: !!session,
-    signIn,
-    signUp,
-    signInWithGoogle,
+    signInAnonymously,
     signOut,
   };
 }

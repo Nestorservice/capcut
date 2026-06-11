@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Dimensions, FlatList, StyleSheet, Text, View, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, Text, View, NativeScrollEvent, NativeSyntheticEvent, ActivityIndicator } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,6 +9,7 @@ import { Colors } from '@constants/colors';
 import { Typography } from '@constants/typography';
 import { Dim } from '@constants/dimensions';
 import { useAuthStore } from '@store/authStore';
+import { useAuth } from '@hooks/useAuth';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Onboarding'>;
 
@@ -50,24 +51,33 @@ export function OnboardingScreen({ navigation }: Props) {
   const [index, setIndex] = useState(0);
   const listRef = useRef<FlatList<Slide>>(null);
   const completeOnboarding = useAuthStore(s => s.completeOnboarding);
+  const { signInAnonymously, isLoading } = useAuth();
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const i = Math.round(e.nativeEvent.contentOffset.x / SCREEN_W);
     setIndex(i);
   };
 
+  const handleFinish = async () => {
+    completeOnboarding();
+    try {
+      await signInAnonymously();
+      // RootNavigator will automatically switch to Main when session exists
+    } catch (e) {
+      // Error handled by useAuth toast
+    }
+  };
+
   const goNext = () => {
     if (index < SLIDES.length - 1) {
       listRef.current?.scrollToIndex({ index: index + 1, animated: true });
     } else {
-      completeOnboarding();
-      navigation.replace('SignIn');
+      handleFinish();
     }
   };
 
   const skip = () => {
-    completeOnboarding();
-    navigation.replace('SignIn');
+    handleFinish();
   };
 
   return (
@@ -114,10 +124,10 @@ export function OnboardingScreen({ navigation }: Props) {
           variant="primary"
           size="lg"
           fullWidth
-        />
-        <Text style={styles.signIn} onPress={skip}>
-          Already have an account? <Text style={styles.signInLink}>Sign in</Text>
-        </Text>
+          disabled={isLoading}
+        >
+          {isLoading && <ActivityIndicator color="#ffffff" style={{ marginLeft: 8 }} />}
+        </Button>
       </View>
     </View>
   );
@@ -136,6 +146,4 @@ const styles = StyleSheet.create({
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: Colors.border.default },
   dotActive: { backgroundColor: Colors.accent.pink, width: 24 },
   footer: { paddingHorizontal: Dim.spacing.lg, paddingBottom: 40, gap: 16 },
-  signIn: { color: Colors.text.secondary, textAlign: 'center', fontSize: Typography.sizes.base },
-  signInLink: { color: Colors.accent.pink, fontWeight: '700' },
 });

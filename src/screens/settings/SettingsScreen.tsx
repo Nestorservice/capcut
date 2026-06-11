@@ -9,7 +9,6 @@ import { Toggle } from '@components/ui/Toggle';
 import { Colors } from '@constants/colors';
 import { Typography } from '@constants/typography';
 import { Dim } from '@constants/dimensions';
-import { useAuth } from '@hooks/useAuth';
 import { MainStackParamList } from '@types/navigation.types';
 import { useUIStore } from '@store/uiStore';
 
@@ -17,7 +16,6 @@ type Nav = NativeStackNavigationProp<MainStackParamList>;
 
 export function SettingsScreen() {
   const navigation = useNavigation<Nav>();
-  const { signOut } = useAuth();
   const showToast = useUIStore(s => s.showToast);
   const [pushEnabled, setPushEnabled] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
@@ -68,8 +66,6 @@ export function SettingsScreen() {
         </Section>
         <Section title="Account">
           <NavRow icon="person" label="Edit profile" onPress={() => undefined} />
-          <NavRow icon="lock" label="Change password" onPress={() => undefined} />
-          <NavRow icon="logout" label="Sign out" onPress={signOut} danger />
         </Section>
         <Section title="About">
           <InfoRow label="Version" value="1.0.0" />

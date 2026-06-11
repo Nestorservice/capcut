@@ -21,7 +21,7 @@ const SCREEN_W = Dimensions.get('window').width;
 
 export function ProfileScreen() {
   const navigation = useNavigation<Nav>();
-  const { profile, signOut } = useAuth();
+  const { profile } = useAuth();
   const { projects } = useProjects();
 
   const totalDuration = projects.reduce((sum, p) => sum + (p.duration ?? 0), 0);
@@ -49,8 +49,7 @@ export function ProfileScreen() {
       </View>
 
       <View style={styles.actionsRow}>
-        <Button label="Edit profile" variant="outline" size="md" onPress={() => undefined} icon="edit" />
-        <Button label="Sign out" variant="ghost" size="md" onPress={signOut} />
+        <Button label="Edit profile" variant="outline" size="md" onPress={() => undefined} icon="edit" fullWidth />
       </View>
 
       <View style={styles.sectionHeader}>
