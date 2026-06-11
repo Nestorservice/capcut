@@ -15,7 +15,8 @@ import { useEditorStore } from '@store/editorStore';
 type Props = NativeStackScreenProps<EditorStackParamList, 'Filters'>;
 
 export function FiltersScreen({ route, navigation }: Props) {
-  const clip = useEditorStore(s => s.clips.find(c => c.id === route.params.clipId) ?? null);
+  const clipId = route.params?.clipId;
+  const clip = useEditorStore(s => s.clips.find(c => c.id === clipId) ?? null);
   const updateClip = useEditorStore(s => s.updateClip);
   const [selectedFilterId, setSelectedFilterId] = useState(clip?.filter.filterId ?? 'none');
   const [intensity, setIntensity] = useState(clip?.filter.intensity ?? 1);

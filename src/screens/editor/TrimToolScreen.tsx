@@ -14,7 +14,8 @@ import { formatTime } from '@utils/formatTime';
 type Props = NativeStackScreenProps<EditorStackParamList, 'TrimTool'>;
 
 export function TrimToolScreen({ route, navigation }: Props) {
-  const { clip, thumbnails, loadThumbnails, applyTrim } = useTrimmer(route.params.clipId);
+  const clipId = route.params?.clipId;
+  const { clip, thumbnails, loadThumbnails, applyTrim } = useTrimmer(clipId);
   const [trimStart, setTrimStart] = useState(0);
   const [trimEnd, setTrimEnd] = useState(0);
 

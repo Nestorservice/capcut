@@ -265,6 +265,14 @@ class FFmpegService {
 
   async processClip(clip: Clip, workDir: string): Promise<string> {
     let current = clip.sourceUri;
+    let hasAudio = true;
+    try {
+      const info = await this.getVideoInfo(current);
+      hasAudio = info.hasAudio;
+    } catch {
+      hasAudio = false;
+    }
+
     if (clip.trimStart > 0 || clip.trimEnd < clip.duration) {
       const trimmed = `${workDir}/trim_${clip.id}.mp4`;
       await this.trimVideo(clip.sourceUri, clip.trimStart, clip.trimEnd, trimmed);
@@ -272,7 +280,7 @@ class FFmpegService {
     }
     if (clip.speed !== 1.0) {
       const sped = `${workDir}/speed_${clip.id}.mp4`;
-      await this.changeSpeed(current, clip.speed, sped);
+      await this.changeSpeed(current, clip.speed, sped, hasAudio);
       current = sped;
     }
     if (clip.filter.filterId !== 'none') {
@@ -288,7 +296,7 @@ class FFmpegService {
       await this.applyColorAdjustment(current, adj, adjusted);
       current = adjusted;
     }
-    if (clip.isMuted || clip.volume !== 1.0) {
+    if (hasAudio && (clip.isMuted || clip.volume !== 1.0)) {
       const audioed = `${workDir}/vol_${clip.id}.mp4`;
       const cmd = clip.isMuted
         ? `-y -i "${current}" -c:v copy -an "${audioed}"`

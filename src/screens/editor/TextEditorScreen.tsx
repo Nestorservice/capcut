@@ -17,7 +17,8 @@ type Props = NativeStackScreenProps<EditorStackParamList, 'TextEditor'>;
 const COLORS = ['#ffffff', '#000000', '#ff4081', '#9c27b0', '#03a9f4', '#4caf50', '#ffeb3b', '#ff5722'];
 
 export function TextEditorScreen({ route, navigation }: Props) {
-  const existing = useEditorStore(s => (route.params.overlayId ? s.textOverlays.find(t => t.id === route.params.overlayId) ?? null : null));
+  const overlayId = route.params?.overlayId;
+  const existing = useEditorStore(s => (overlayId ? s.textOverlays.find(t => t.id === overlayId) ?? null : null));
   const currentTime = useEditorStore(s => s.currentTime);
   const totalDuration = useEditorStore(s => s.totalDuration);
   const addText = useEditorStore(s => s.addTextOverlay);

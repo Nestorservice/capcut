@@ -16,7 +16,8 @@ import { useUIStore } from '@store/uiStore';
 type Props = NativeStackScreenProps<EditorStackParamList, 'SplitTool'>;
 
 export function SplitToolScreen({ route, navigation }: Props) {
-  const clip = useEditorStore(s => s.clips.find(c => c.id === route.params.clipId) ?? null);
+  const clipId = route.params?.clipId;
+  const clip = useEditorStore(s => s.clips.find(c => c.id === clipId) ?? null);
   const splitClip = useEditorStore(s => s.splitClip);
   const showToast = useUIStore(s => s.showToast);
   const [splitAt, setSplitAt] = useState(clip ? (clip.trimStart + clip.trimEnd) / 2 : 0);

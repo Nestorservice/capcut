@@ -15,7 +15,8 @@ import { useEditorStore } from '@store/editorStore';
 type Props = NativeStackScreenProps<EditorStackParamList, 'Transition'>;
 
 export function TransitionScreen({ route, navigation }: Props) {
-  const clip = useEditorStore(s => s.clips.find(c => c.id === route.params.clipId) ?? null);
+  const clipId = route.params?.clipId;
+  const clip = useEditorStore(s => s.clips.find(c => c.id === clipId) ?? null);
   const updateClip = useEditorStore(s => s.updateClip);
   const [selectedId, setSelectedId] = useState(clip?.transitionToNextId ?? 'none');
   const [duration, setDuration] = useState(clip?.transitionDuration ?? 0.5);

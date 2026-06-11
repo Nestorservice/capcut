@@ -32,10 +32,12 @@ export const ffmpegCommands = {
     return `-y ${inputArgs} -filter_complex "${filter}" -map "[v]" -map "[a]" -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 128k ${escape(outputPath)}`;
   },
 
-  changeSpeed(inputPath: string, speed: number, outputPath: string): string {
+  changeSpeed(inputPath: string, speed: number, outputPath: string, hasAudio = true): string {
     const safe = Math.max(0.1, Math.min(100, speed));
     const vSetpts = (1 / safe).toFixed(4);
-    let audioChain = '';
+    if (!hasAudio) {
+      return `-y -i ${escape(inputPath)} -vf "setpts=${vSetpts}*PTS" -c:v libx264 -preset veryfast -crf 23 ${escape(outputPath)}`;
+    }
     let remaining = safe;
     const atempos: string[] = [];
     while (remaining > 2.0) {
@@ -47,7 +49,7 @@ export const ffmpegCommands = {
       remaining /= 0.5;
     }
     atempos.push(`atempo=${remaining.toFixed(4)}`);
-    audioChain = atempos.join(',');
+    const audioChain = atempos.join(',');
     return `-y -i ${escape(inputPath)} -filter_complex "[0:v]setpts=${vSetpts}*PTS[v];[0:a]${audioChain}[a]" -map "[v]" -map "[a]" -c:v libx264 -preset veryfast -crf 23 -c:a aac ${escape(outputPath)}`;
   },
 

@@ -16,7 +16,8 @@ type Props = NativeStackScreenProps<EditorStackParamList, 'SpeedControl'>;
 const PRESETS = [0.25, 0.5, 1, 1.5, 2, 3, 4];
 
 export function SpeedControlScreen({ route, navigation }: Props) {
-  const clip = useEditorStore(s => s.clips.find(c => c.id === route.params.clipId) ?? null);
+  const clipId = route.params?.clipId;
+  const clip = useEditorStore(s => s.clips.find(c => c.id === clipId) ?? null);
   const updateClip = useEditorStore(s => s.updateClip);
   const [tab, setTab] = useState<'normal' | 'curve'>('normal');
   const [speed, setSpeed] = useState(clip?.speed ?? 1);
