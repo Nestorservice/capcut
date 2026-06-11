@@ -19,7 +19,8 @@ const ANIMATIONS = {
 };
 
 export function TextAnimationScreen({ route, navigation }: Props) {
-  const overlay = useEditorStore(s => s.textOverlays.find(t => t.id === route.params.overlayId) ?? null);
+  const overlayId = route.params?.overlayId;
+  const overlay = useEditorStore(s => (overlayId ? s.textOverlays.find(t => t.id === overlayId) ?? null : null));
   const updateText = useEditorStore(s => s.updateTextOverlay);
   const [tab, setTab] = useState<'in' | 'loop' | 'out'>('in');
 
